@@ -1,0 +1,9 @@
+1. Creare e gestire pagine di login per gli operatori del gestionale, da implementare anche la parte sul DB
+
+2. Stampa in una nuova finestra della ricerca effettuata sulla homepage, in forma tabellare, e per ogni record
+    dare la possibilità di poterlo prenotare da li (inserendo il CF dell'utente che ha intenzione di prenotarlo,
+     e dopo aver controllato che effettivamente può prendere un libro)
+     
+3. Tutta la gestione del fine prestito ("ricerca per utente poi si sceglie il libro? Dove metterlo nella gui?)
+
+4. Notifiche in app per l'utente
