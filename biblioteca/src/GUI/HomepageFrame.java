@@ -157,7 +157,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p2.setOpaque(true);           
 		p2.setBackground(Color.white);
 		
-		//p2.setBorder(BorderFactory.createLineBorder(new java.awt.Color(253, 185, 19)));
+		
 		p0_0.setBorder(BorderFactory.createLineBorder(new java.awt.Color(253, 185, 19),3));
 		
 		
