@@ -12,7 +12,7 @@ public class DBManager {
 	public static final String JDBCURLSQLite = "jdbc:sqlite:test.db";
 
 	public static final String JDBCDriverMySQL = "com.mysql.cj.jdbc.Driver";
-	public static final String JDBCURLMySQL = "jdbc:mysql://localhost:3306/BibliotecaOOP?user=leonardo&password=prova&serverTimezone=UTC";
+	public static final String JDBCURLMySQL = "jdbc:mysql://localhost:3306/BibliotecaOOP?user=test&password=test1234&serverTimezone=UTC";
 
 	protected Statement statement;
 	protected Connection connection;
@@ -70,14 +70,18 @@ public class DBManager {
 	public ResultSet searchHome(String f1, String f2) throws SQLException {
 		
 		//Stampa per creare la query, da implementare il collegamento con il db
-		StringBuffer Query= new StringBuffer("SELECT * FROM Libro WHERE field1 LIKE \"field2\";");
-		Query.replace(26,32, f1);
-		Query.replace(39,45, f2);
-		/*
-		 * 
-		 * System.out.println(Query.toString());
-		 * 
-		 * */
+		StringBuffer Query;
+		if(f2.isEmpty()) {
+			Query= new StringBuffer("SELECT * FROM Libro;");
+		}
+		else {
+			Query= new StringBuffer("SELECT * FROM Libro WHERE field1 LIKE \"f\";");
+			Query.replace(26,32, f1);
+			Query.replace(39,40, f2);
+		}
+		
+		System.out.println(Query.toString());
+		 
 		return statement.executeQuery(Query.toString());
 		
 		

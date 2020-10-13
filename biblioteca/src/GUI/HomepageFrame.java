@@ -1,6 +1,8 @@
 package GUI;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
@@ -39,7 +41,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		confirm.setBackground(new java.awt.Color(253, 185, 19));
 		confirm.setForeground(new java.awt.Color(69, 85, 96));
 		confirm.setFont(f);
-		//confirm.setPreferredSize(new Dimension(200, 40)); --è in un GridLayout, nel caso modifichiamo il layout e si toglie il commento
+		//confirm.setPreferredSize(new Dimension(200, 40)); --ï¿½ in un GridLayout, nel caso modifichiamo il layout e si toglie il commento
 		
 		searchTF = new JTextField("");
 		searchTF.setFont(f);
@@ -66,7 +68,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		});
 		//--------------------------
 		
-		JLabel logo = new JLabel(new ImageIcon("./biblioteca/src/GUI/logof.png")); 
+		JLabel logo = new JLabel(new ImageIcon("./src/GUI/logof.png")); 
 		
 		//--------------------------Pannello della ricerca 
 		JPanel p0 = new JPanel(new GridLayout(1,2,50,0));
@@ -102,7 +104,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p1.setOpaque(true);
 		p1.setBackground(Color.white);
 		
-		JPanel p1_1 = new JPanel(new FlowLayout()); // pannello per bottoni del menù --da fare
+		JPanel p1_1 = new JPanel(new FlowLayout()); // pannello per bottoni del menï¿½ --da fare
 		p1_1.setOpaque(true);
 		p1_1.setBackground(new java.awt.Color(253, 185, 19));
 		
@@ -111,7 +113,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p1_2.setBackground(new java.awt.Color(253, 185, 19));
 		
 		p1.add(BorderLayout.PAGE_START, new JLabel("<html><br/></html>"));
-		p1.add(BorderLayout.CENTER,logo);
+		p1.add(logo,BorderLayout.CENTER);
 		p1.add(BorderLayout.LINE_START,p1_1);
 		p1.add(BorderLayout.LINE_END,p1_2);
 		
@@ -161,7 +163,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p0_0.setBorder(BorderFactory.createLineBorder(new java.awt.Color(253, 185, 19),3));
 		
 		
-		//------------------- Unione dei vari pannelli -> verrà settato come pannello da visualizzare
+		//------------------- Unione dei vari pannelli -> verrï¿½ settato come pannello da visualizzare
 		
 		JPanel pFin= new JPanel(new BorderLayout());
 		pFin.setOpaque(true);
@@ -178,7 +180,6 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		
 		//imposto la finestra non-resizible e di dimensione max schermo ( il pulsante Close permette di chiuedere la finestra
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		setSize(1600, 1600);
 		setResizable(false);
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		setUndecorated(true);
@@ -196,13 +197,26 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			try {
 				db = new DBManager(DBManager.JDBCDriverMySQL, DBManager.JDBCURLMySQL, ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
 				ResultSet rs = db.searchHome(options[typeCB.getSelectedIndex()],searchTF.getText());
-				rs.next();
 				
-				/*
-				 * Adesso stampa su console, dovrÃ  stampare tutte le informazioni riguardo a quel libro/ quei libri
-				 * tipo se Ã¨ disponibile, dov'Ã¨, chi lo ha preso in prestito, ecc
-				 */
-				System.out.println(rs.getString(1) + " " + rs.getString("titolo"));
+				rs.last();	
+				System.out.println(rs.getRow());
+				Object [][]data = new Object[rs.getRow()][5];				
+				rs.beforeFirst();
+								
+				int i=0;			
+				
+				System.out.println("While start...");
+				while(rs.next()) {
+					System.out.println("While at " + i);
+					for(int j=0;j<5;j++) {
+						data[i][j]=rs.getString(j+1);	
+					}
+					i++;					
+					
+				}
+				
+				System.out.println(data);
+				new TableSearch(data);
 				
 			} catch (ClassNotFoundException | SQLException e1) {
 				// TODO Auto-generated catch block
