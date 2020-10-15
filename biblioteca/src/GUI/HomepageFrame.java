@@ -41,7 +41,6 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		confirm.setBackground(new java.awt.Color(253, 185, 19));
 		confirm.setForeground(new java.awt.Color(69, 85, 96));
 		confirm.setFont(f);
-		//confirm.setPreferredSize(new Dimension(200, 40)); --� in un GridLayout, nel caso modifichiamo il layout e si toglie il commento
 		
 		searchTF = new JTextField("");
 		searchTF.setFont(f);
@@ -71,29 +70,47 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		JLabel logo = new JLabel(new ImageIcon("./src/GUI/logof.png")); 
 		
 		//--------------------------Pannello della ricerca 
-		JPanel p0 = new JPanel(new GridLayout(1,2,50,0));
+		JPanel p0 = new JPanel(new GridLayout(1,4,50,20));
 
 		p0.setOpaque(true);
 		p0.setBackground(Color.white);
 		
+		
+		searchTF.setColumns(4);
+		
+		p0.add(new JLabel(""));
 		p0.add(searchTF);
 		p0.add(typeCB);
-		p0.add(confirm);
+		p0.add(new JLabel(""));
 		
-		JPanel p0_0= new JPanel(new GridLayout(3,3,0,120));
+		
+		
+		
+		JPanel p0_2 = new JPanel(new GridLayout(1,3));
+		p0_2.add(new JLabel(""));
+		p0_2.add(confirm);
+		p0_2.add(new JLabel(""));
+		p0_2.setBackground(Color.white);
+		
+		
+		
+		JPanel p0_0= new JPanel(new GridLayout(5,1,0,120));
 		p0_0.setOpaque(true);
 		p0_0.setBackground(Color.white);
 		
-		p0_0.add(new JLabel(""));
-		p0_0.add(new JLabel(""));
-		p0_0.add(new JLabel(""));
-		 
-		p0_0.add(new JLabel(""));
-		p0_0.add(p0);
-		p0_0.add(new JLabel(""));
-		 
-		p0_0.add(new JLabel(""));
-		p0_0.add(new JLabel(""));
+		p0_0.add(new JLabel(""));		
+		p0_0.add(p0);		
+		p0_0.add(p0_2);
+		p0_0.add(new JLabel(""));//Sarà il punto in cui inseriremo le opzioni
+		/*
+		 * Inserisci utente
+		 * Inserisci libro
+		 * Cerca utente
+		 * Visualizza prestiti
+		 * ecc.
+		 * 
+		 * è da fare ancora la divisione dei libri per biblioteca
+		 */
 		p0_0.add(new JLabel(""));
 		
 		
@@ -199,32 +216,26 @@ public class HomepageFrame extends JFrame implements ActionListener{
 				ResultSet rs = db.searchHome(options[typeCB.getSelectedIndex()],searchTF.getText());
 				
 				rs.last();	
-				System.out.println(rs.getRow());
 				Object [][]data = new Object[rs.getRow()][5];				
 				rs.beforeFirst();
 								
 				int i=0;			
 				
-				System.out.println("While start...");
 				while(rs.next()) {
-					System.out.println("While at " + i);
 					for(int j=0;j<5;j++) {
 						data[i][j]=rs.getString(j+1);	
 					}
+		
+					
 					i++;					
 					
 				}
-				
-				System.out.println(data);
 				new TableSearch(data);
 				
 			} catch (ClassNotFoundException | SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
-			
-			
-			
+			}							
 		}
 	}
 	
