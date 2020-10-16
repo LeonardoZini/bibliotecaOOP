@@ -67,41 +67,40 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		});
 		//--------------------------
 		
-		JLabel logo = new JLabel(new ImageIcon("./src/GUI/logof.png")); 
+		JLabel logo = new JLabel(new ImageIcon("./biblioteca/src/GUI/logof.png")); 
 		
 		//--------------------------Pannello della ricerca 
-		JPanel p0 = new JPanel(new GridLayout(1,4,50,20));
-
-		p0.setOpaque(true);
-		p0.setBackground(Color.white);
+	
+		JPanel p0_0 = new JPanel(new GridLayout(4,5,0,80));
 		
 		
-		searchTF.setColumns(4);
-		
-		p0.add(new JLabel(""));
-		p0.add(searchTF);
-		p0.add(typeCB);
-		p0.add(new JLabel(""));
-		
-		
-		
-		
-		JPanel p0_2 = new JPanel(new GridLayout(1,3));
-		p0_2.add(new JLabel(""));
-		p0_2.add(confirm);
-		p0_2.add(new JLabel(""));
-		p0_2.setBackground(Color.white);
-		
-		
-		
-		JPanel p0_0= new JPanel(new GridLayout(5,1,0,120));
 		p0_0.setOpaque(true);
 		p0_0.setBackground(Color.white);
 		
-		p0_0.add(new JLabel(""));		
-		p0_0.add(p0);		
-		p0_0.add(p0_2);
-		p0_0.add(new JLabel(""));//Sarà il punto in cui inseriremo le opzioni
+		p0_0.add(new JLabel(""));
+		p0_0.add(new JLabel(""));
+		p0_0.add(new JLabel(""));
+		p0_0.add(new JLabel(""));
+		p0_0.add(new JLabel(""));
+		  
+		p0_0.add(new JLabel(""));
+		p0_0.add(searchTF);
+		p0_0.add(new JLabel(""));
+		p0_0.add(typeCB);
+		p0_0.add(new JLabel(""));
+		  
+		p0_0.add(new JLabel(""));
+		p0_0.add(new JLabel(""));
+		p0_0.add(confirm);
+		p0_0.add(new JLabel(""));
+		p0_0.add(new JLabel(""));
+		
+		p0_0.add(new JLabel(""));
+		p0_0.add(new JLabel(""));
+		p0_0.add(new JLabel(""));
+		p0_0.add(new JLabel(""));
+		p0_0.add(new JLabel(""));
+		
 		/*
 		 * Inserisci utente
 		 * Inserisci libro
@@ -110,9 +109,8 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		 * ecc.
 		 * 
 		 * è da fare ancora la divisione dei libri per biblioteca
-		 */
-		p0_0.add(new JLabel(""));
 		
+		*/
 		
 		//------------------- Pannello di sopra
 		
