@@ -1,10 +1,21 @@
 package GUI;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import Dominio.*;
+import java.net.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+
+//import java.net.HttpUrlConnection;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.*;
@@ -28,6 +39,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 	private String[] options;
 	private JButton confirm;
 	private JButton close;
+	private URL url;
 	
 
 	public HomepageFrame() {
@@ -67,7 +79,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		});
 		//--------------------------
 		
-		JLabel logo = new JLabel(new ImageIcon("./biblioteca/src/GUI/logof.png")); 
+		JLabel logo = new JLabel(new ImageIcon("./src/GUI/logof.png")); 
 		
 		//--------------------------Pannello della ricerca 
 	
@@ -205,35 +217,32 @@ public class HomepageFrame extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == confirm) {
-			System.out.println("Button pressed..");
-			
-			//Fare query in base a quello che viene cercato
-			DBManager db;
 			try {
-				db = new DBManager(DBManager.JDBCDriverMySQL, DBManager.JDBCURLMySQL, ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_UPDATABLE);
-				ResultSet rs = db.searchHome(options[typeCB.getSelectedIndex()],searchTF.getText());
+				ObjectMapper om = new ObjectMapper();
+				url=new URL("http://2.224.243.66:8080/Libro");
+				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+				BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				
-				rs.last();	
-				Object [][]data = new Object[rs.getRow()][5];				
-				rs.beforeFirst();
-								
-				int i=0;			
+					
+				Libro[] libro = om.readValue(read.readLine(),Libro[].class);
 				
-				while(rs.next()) {
-					for(int j=0;j<5;j++) {
-						data[i][j]=rs.getString(j+1);	
-					}
-		
-					
-					i++;					
-					
-				}
+				ArrayList<Libro> data = new ArrayList<Libro>(Arrays.asList(libro));
+				
+				
 				new TableSearch(data);
 				
-			} catch (ClassNotFoundException | SQLException e1) {
+			} catch (MalformedURLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}							
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			
+			
+			
+										
 		}
 	}
 	

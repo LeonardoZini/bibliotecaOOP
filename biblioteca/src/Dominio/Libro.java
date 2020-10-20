@@ -2,11 +2,11 @@ package Dominio;
 
 public class Libro {
 		private String ISBN; // Univoco
-		private boolean isAvailable;
+		private Boolean isAvailable;
 		private String nome;
 		private String genere;
 		private String autore;
-		private int pagine;
+		private String pagine;
 		
 		
 		
@@ -17,10 +17,10 @@ public class Libro {
 			this.isAvailable=true;
 			this.genere="None";
 			this.autore="None";
-			this.pagine=-1;
+			this.pagine="";
 		}
 
-		public Libro(String iSBN, String nome, boolean isAvailable, String genere, String autore, int pagine) {
+		public Libro(String iSBN, String nome, Boolean isAvailable, String genere, String autore, String pagine) {
 			super();
 			ISBN = iSBN;
 			this.isAvailable = isAvailable;
@@ -60,10 +60,10 @@ public class Libro {
 		public void setAutore(String autore) {
 			this.autore = autore;
 		}
-		public int getPagine() {
+		public String getPagine() {
 			return pagine;
 		}
-		public void setPagine(int pagine) {
+		public void setPagine(String pagine) {
 			this.pagine = pagine;
 		}
 

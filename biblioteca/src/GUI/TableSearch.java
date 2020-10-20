@@ -1,8 +1,10 @@
 package GUI;
 import java.awt.event.ActionEvent;
+import Dominio.*;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
@@ -16,7 +18,7 @@ public class TableSearch extends JFrame{
 	
 	private static final long serialVersionUID = 1L;
 	
-	String[] columnNames= {"ISBN", "Titolo","Genere","Pagine","Autore"};
+	String[] columnNames= {"ISBN", "Titolo","Genere","Pagine","Autore","Disponibile"};
 	
 	/*
 	 * 
@@ -35,7 +37,7 @@ public class TableSearch extends JFrame{
 	
 	
 	
-	public TableSearch(Object[][] data) {
+	public TableSearch(ArrayList<Libro> data) {
 		super("Risultati");
 		
 		setUndecorated(true);
@@ -150,7 +152,8 @@ public class TableSearch extends JFrame{
 		
 	
 	public static void main(String[] args) {
-		Object[][] data = {{"123456789","Test1","Test2","Test3","Test4",new JButton("TEST")}};
+		ArrayList<Libro> data=null;
+		data.add(new Libro());
 		new TableSearch(data);		
 		
 	}
@@ -177,10 +180,10 @@ class JTableButtonModel extends AbstractTableModel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-		private Object[][] rows;
+		private ArrayList<Libro> rows = new ArrayList<Libro>();
 		private String[] columns;
 	
-		public JTableButtonModel(Object[][] data,String[] column) {
+		public JTableButtonModel(ArrayList<Libro> data,String[] column) {
 			this.rows=data;
 			this.columns=column;
 			
@@ -190,13 +193,22 @@ class JTableButtonModel extends AbstractTableModel {
 	      return columns[column];
 	   }
 	   public int getRowCount() {
-	      return rows.length;
+	      return rows.size();
 	   }
 	   public int getColumnCount() {
 	      return columns.length;
 	   }
 	   public Object getValueAt(int row, int column) {
-	      return rows[row][column];
+		   switch(column) {
+		   case 0 : return rows.get(row).getISBN();
+		   case 1 : return rows.get(row).getNome();
+		   case 2 : return rows.get(row).getGenere();
+		   case 3 : return rows.get(row).getPagine();
+		   case 4 : return rows.get(row).getAutore(); 
+		   
+		   }
+		   return "Null";
+	      
 	   }
 	   public boolean isCellEditable(int row, int column) {
 	      return false;

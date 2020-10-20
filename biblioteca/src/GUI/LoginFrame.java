@@ -38,8 +38,23 @@ public class LoginFrame extends JFrame implements ActionListener{
 		passwordF = new JPasswordField(10);
 		passwordF.setPreferredSize( new Dimension( 120, 24 ) );
 		
-		okBT= new JButton();
+		okBT= new JButton("Accedi");
 		okBT.setPreferredSize( new Dimension( 120, 24 ) );
+		
+		okBT.addActionListener(new ActionListener() {
+			
+			 @Override
+			public void actionPerformed(ActionEvent e) {
+				/*
+				 * 1. Invia dati al server
+				 * 2. Aspetta risposta
+				 * 3. Se ok, apri homepage, passando il codice operatore come parametro
+				 * 4. Chiudi pagina login
+				 */
+				 
+				new HomepageFrame();
+			}
+		});
 		
 		// Frame generale pagina di Login
 		JFrame p0 = new JFrame("Login");         
