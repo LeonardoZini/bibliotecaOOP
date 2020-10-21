@@ -41,6 +41,21 @@ public class HomepageFrame extends JFrame implements ActionListener{
 	private JButton close;
 	private URL url;
 	
+	/*
+	 * Inserisci utente
+	 * Inserisci libro
+	 * Cerca utente
+	 * Visualizza prestiti
+	 * ecc.
+	 * 
+	 * è da fare ancora la divisione dei libri per biblioteca
+	
+	*/
+	private	JButton NewUserBT;
+	private	JButton NewBookBT;
+	private	JButton SearchUserBT;
+	private	JButton BooksBT;
+	
 
 	public HomepageFrame() {
 		super("Homepage Ricerca");
@@ -54,6 +69,25 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		confirm.setForeground(new java.awt.Color(69, 85, 96));
 		confirm.setFont(f);
 		
+		NewUserBT = new JButton("Aggiungi Utente");
+		NewBookBT = new JButton("Aggiungi Libro");
+		SearchUserBT = new JButton("Cerca Utente");
+		BooksBT = new JButton("Visualizza Prestiti");
+		
+		NewUserBT.setBackground(new java.awt.Color(253, 185, 19));
+		NewUserBT.setForeground(new java.awt.Color(69, 85, 96));
+		NewUserBT.setFont(f);
+		NewBookBT.setBackground(new java.awt.Color(253, 185, 19));
+		NewBookBT.setForeground(new java.awt.Color(69, 85, 96));
+		NewBookBT.setFont(f);
+		SearchUserBT.setBackground(new java.awt.Color(253, 185, 19));
+		SearchUserBT.setForeground(new java.awt.Color(69, 85, 96));
+		SearchUserBT.setFont(f);
+		BooksBT.setBackground(new java.awt.Color(253, 185, 19));
+		BooksBT.setForeground(new java.awt.Color(69, 85, 96));
+		BooksBT.setFont(f);
+			
+		
 		searchTF = new JTextField("");
 		searchTF.setFont(f);
 		searchTF.setForeground(new java.awt.Color(69, 85, 96));
@@ -64,6 +98,10 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		typeCB.setFont(f);
 		
 		confirm.addActionListener(this);
+		NewUserBT.addActionListener(this);
+		NewBookBT.addActionListener(this);
+		SearchUserBT.addActionListener(this);
+		BooksBT.addActionListener(this);
 		
 		//------------------------- Close Button
 		close = new JButton("Close");
@@ -79,7 +117,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		});
 		//--------------------------
 		
-		JLabel logo = new JLabel(new ImageIcon("./src/GUI/logof.png")); 
+		JLabel logo = new JLabel(new ImageIcon("./GUI/Logo_BT.PNG")); 
 		
 		//--------------------------Pannello della ricerca 
 	
@@ -107,11 +145,11 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p0_0.add(new JLabel(""));
 		p0_0.add(new JLabel(""));
 		
+		p0_0.add(NewUserBT);
+		p0_0.add(NewBookBT);
 		p0_0.add(new JLabel(""));
-		p0_0.add(new JLabel(""));
-		p0_0.add(new JLabel(""));
-		p0_0.add(new JLabel(""));
-		p0_0.add(new JLabel(""));
+		p0_0.add(SearchUserBT);
+		p0_0.add(BooksBT);
 		
 		/*
 		 * Inserisci utente
