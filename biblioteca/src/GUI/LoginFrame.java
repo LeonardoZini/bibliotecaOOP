@@ -3,6 +3,12 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.*;
@@ -32,6 +38,8 @@ public class LoginFrame extends JFrame implements ActionListener{
 	public LoginFrame() {
 		
 		
+		
+		
 		userTF = new JTextField("");
 		userTF.setPreferredSize( new Dimension( 120, 24 ) );
 		
@@ -51,6 +59,21 @@ public class LoginFrame extends JFrame implements ActionListener{
 				 * 3. Se ok, apri homepage, passando il codice operatore come parametro
 				 * 4. Chiudi pagina login
 				 */
+				 
+				try {
+					URL url=new URL(String.format("http://2.224.243.66:8080/login?user=%s&password=%s",userTF.getText(),passwordF.getPassword()));
+					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+					connection.setRequestMethod("POST");
+					BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+					System.out.println(read.readLine());
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+					
 				 
 				new HomepageFrame();
 			}
