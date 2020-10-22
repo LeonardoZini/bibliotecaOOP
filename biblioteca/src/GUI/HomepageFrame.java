@@ -41,33 +41,28 @@ public class HomepageFrame extends JFrame implements ActionListener{
 	private JButton close;
 	private URL url;
 	
-	/*
-	 * Inserisci utente
-	 * Inserisci libro
-	 * Cerca utente
-	 * Visualizza prestiti
-	 * ecc.
-	 * 
-	 * è da fare ancora la divisione dei libri per biblioteca
 	
-	*/
 	private	JButton NewUserBT;
 	private	JButton NewBookBT;
 	private	JButton SearchUserBT;
 	private	JButton BooksBT;
+	
+	private JButton AboutBT;
 	
 
 	public HomepageFrame() {
 		super("Homepage Ricerca");
 		
 		Font f = new Font("Default",Font.PLAIN,18);
-		Font f2 = new Font("Default",Font.PLAIN,12);
+		Font f2 = new Font("Default",Font.PLAIN,8);
 		options = new String[] {"ISBN","Titolo","Genere","Autore"};		
 		
 		confirm = new JButton("Cerca");
 		confirm.setBackground(new java.awt.Color(253, 185, 19));
 		confirm.setForeground(new java.awt.Color(69, 85, 96));
 		confirm.setFont(f);
+		confirm.setFocusPainted(false);
+		confirm.setBorderPainted(false);
 		
 		NewUserBT = new JButton("Aggiungi Utente");
 		NewBookBT = new JButton("Aggiungi Libro");
@@ -77,16 +72,31 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		NewUserBT.setBackground(new java.awt.Color(253, 185, 19));
 		NewUserBT.setForeground(new java.awt.Color(69, 85, 96));
 		NewUserBT.setFont(f);
+		NewUserBT.setFocusPainted(false);
+        NewUserBT.setBorderPainted(false);
 		NewBookBT.setBackground(new java.awt.Color(253, 185, 19));
 		NewBookBT.setForeground(new java.awt.Color(69, 85, 96));
 		NewBookBT.setFont(f);
+		NewBookBT.setFocusPainted(false);
+        NewBookBT.setBorderPainted(false);
 		SearchUserBT.setBackground(new java.awt.Color(253, 185, 19));
 		SearchUserBT.setForeground(new java.awt.Color(69, 85, 96));
 		SearchUserBT.setFont(f);
+		SearchUserBT.setFocusPainted(false);
+        SearchUserBT.setBorderPainted(false);
 		BooksBT.setBackground(new java.awt.Color(253, 185, 19));
 		BooksBT.setForeground(new java.awt.Color(69, 85, 96));
 		BooksBT.setFont(f);
-			
+        BooksBT.setFocusPainted(false);
+        BooksBT.setBorderPainted(false);
+		
+		AboutBT = new JButton("About");
+		AboutBT.setBackground(Color.white);
+		AboutBT.setForeground(Color.black);
+		AboutBT.setFont(f);
+		AboutBT.setContentAreaFilled(false);
+        AboutBT.setFocusPainted(false);
+        AboutBT.setBorderPainted(false);
 		
 		searchTF = new JTextField("");
 		searchTF.setFont(f);
@@ -96,18 +106,22 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		typeCB.setBackground(new java.awt.Color(253, 185, 19));
 		typeCB.setForeground(new java.awt.Color(69, 85, 96));
 		typeCB.setFont(f);
+		typeCB.setFocusable(false);
 		
 		confirm.addActionListener(this);
 		NewUserBT.addActionListener(this);
 		NewBookBT.addActionListener(this);
 		SearchUserBT.addActionListener(this);
 		BooksBT.addActionListener(this);
+		AboutBT.addActionListener(this);
 		
 		//------------------------- Close Button
 		close = new JButton("Close");
 		close.setBackground(new java.awt.Color(253, 185, 19));
 		close.setForeground(new java.awt.Color(69, 85, 96));
 		close.setFont(f);
+		close.setFocusPainted(false);
+		close.setBorderPainted(false);
 
 		close.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
@@ -151,16 +165,6 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p0_0.add(SearchUserBT);
 		p0_0.add(BooksBT);
 		
-		/*
-		 * Inserisci utente
-		 * Inserisci libro
-		 * Cerca utente
-		 * Visualizza prestiti
-		 * ecc.
-		 * 
-		 * è da fare ancora la divisione dei libri per biblioteca
-		
-		*/
 		
 		//------------------- Pannello di sopra
 		
@@ -209,7 +213,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));
-		p3.add(l1);  
+		p3.add(AboutBT);  
 		
 		//------------------- Pannello centrale
 		
@@ -275,15 +279,28 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			}
+			}								
+		}
+		
+		if(e.getSource() == AboutBT) {
 			
+			Font f = new Font("Default",Font.PLAIN,15);
 			
+			JPanel aboutPL= new JPanel();
+			aboutPL.setBackground(new java.awt.Color(253, 185, 19));
+			JTextArea textArea= new JTextArea("@Lorenzo Fontanili\n@Leonardo Zini\nTesina per il corso di Programmazione ad Oggetti anno 2019-2020");
+			textArea.setForeground(new java.awt.Color(69, 85, 96));   
+			textArea.setBackground(new java.awt.Color(253, 185, 19)); 
+			textArea.setFont(f);
+			aboutPL.add(textArea);
 			
+			//JOptionPane.showMessageDialog(this, aboutPL , "About BiblioTech", JOptionPane.PLAIN_MESSAGE, JOptionPane.YES_NO_OPTION);
+			JOptionPane.showOptionDialog(null, aboutPL ,"About BiblioTech", JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE, null, new Object[]{}, null);
 			
-										
 		}
 	}
 	
+
 	
 	
 	public static void main(String[] args) {
