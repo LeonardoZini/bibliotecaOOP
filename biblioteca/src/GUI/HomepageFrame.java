@@ -90,7 +90,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
         BooksBT.setFocusPainted(false);
         BooksBT.setBorderPainted(false);
 		
-		AboutBT = new JButton("About");
+		AboutBT = new JButton("             About");
 		AboutBT.setBackground(Color.white);
 		AboutBT.setForeground(Color.black);
 		AboutBT.setFont(f);
@@ -191,9 +191,6 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		JPanel p3= new JPanel(new GridLayout(2,9));
 		p3.setOpaque(true);
 		p3.setBackground(Color.white);
-		JLabel l1= new JLabel("				About(?)"); // --da fare, basta metterci un botton con sfondo e bordi color bianco(sfondo) 
-		l1.setFont(f2);
-		l1.setForeground(new java.awt.Color(69, 85, 96));
 		
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));
@@ -274,10 +271,8 @@ public class HomepageFrame extends JFrame implements ActionListener{
 				new TableSearch(data);
 				
 			} catch (MalformedURLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}								
 		}
@@ -288,19 +283,214 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			
 			JPanel aboutPL= new JPanel();
 			aboutPL.setBackground(new java.awt.Color(253, 185, 19));
+			
+			// Messaggio che apparirà nel JDialog premendo su about, basta modificarlo qui sotto ( usare \n per andare a capo)
 			JTextArea textArea= new JTextArea("@Lorenzo Fontanili\n@Leonardo Zini\nTesina per il corso di Programmazione ad Oggetti anno 2019-2020");
 			textArea.setForeground(new java.awt.Color(69, 85, 96));   
 			textArea.setBackground(new java.awt.Color(253, 185, 19)); 
 			textArea.setFont(f);
+			textArea.setEditable(false);
+			
 			aboutPL.add(textArea);
 			
-			//JOptionPane.showMessageDialog(this, aboutPL , "About BiblioTech", JOptionPane.PLAIN_MESSAGE, JOptionPane.YES_NO_OPTION);
-			JOptionPane.showOptionDialog(null, aboutPL ,"About BiblioTech", JOptionPane.DEFAULT_OPTION,JOptionPane.PLAIN_MESSAGE, null, new Object[]{}, null);
+			JDialog aboutJD= new JDialog(this, "About BiblioTech"); // JDialog name
+			aboutJD.setContentPane(aboutPL);
 			
+			aboutJD.setResizable(false);
+			aboutJD.setSize(600,150); //JDialog size
+			aboutJD.setLocationRelativeTo(null);
+			
+	        aboutJD.setVisible(true);
+	        
+		}
+		
+		if(e.getSource() == NewUserBT) {
+			
+			Font f = new Font("Default",Font.PLAIN,15);
+			
+			JPanel pUser = new JPanel(new GridLayout(6,5,0,40));
+			
+			pUser.setBackground(new java.awt.Color(253, 185, 19)); 
+			pUser.setFont(f);
+			
+			pUser.add(new JLabel(""));
+			pUser.add(new JLabel(""));
+			pUser.add(new JLabel(""));
+			pUser.add(new JLabel(""));
+			pUser.add(new JLabel(""));
+			
+			pUser.add(new JLabel(""));
+			JLabel nome = new JLabel("Nome");
+			nome.setFont(f);
+			nome.setForeground(new java.awt.Color(69, 85, 96));
+			pUser.add(nome);
+			pUser.add(new JLabel(""));
+			JTextField NomeTF = new JTextField("");
+			NomeTF.setFont(f);
+			NomeTF.setForeground(new java.awt.Color(69, 85, 96));
+			pUser.add(NomeTF);
+			pUser.add(new JLabel(""));
+			
+			pUser.add(new JLabel(""));
+			JLabel Cognome = new JLabel("Cognome");
+			Cognome.setFont(f);
+			Cognome.setForeground(new java.awt.Color(69, 85, 96));
+			pUser.add(Cognome);
+			pUser.add(new JLabel(""));
+			JTextField CognomeTF = new JTextField("");
+			CognomeTF.setFont(f);
+			CognomeTF.setForeground(new java.awt.Color(69, 85, 96));
+			pUser.add(CognomeTF);
+			pUser.add(new JLabel(""));
+			
+			pUser.add(new JLabel(""));
+			JLabel CF = new JLabel("CF");
+			CF.setFont(f);
+			CF.setForeground(new java.awt.Color(69, 85, 96));
+			pUser.add(CF);
+			pUser.add(new JLabel(""));
+			JTextField CFTF = new JTextField("");
+			CFTF.setFont(f);
+			CFTF.setForeground(new java.awt.Color(69, 85, 96));
+			pUser.add(CFTF);
+			pUser.add(new JLabel(""));
+
+			pUser.add(new JLabel(""));
+			JLabel Data = new JLabel("Data di Nascita");
+			Data.setFont(f);
+			Data.setForeground(new java.awt.Color(69, 85, 96));
+			pUser.add(Data);
+			pUser.add(new JLabel(""));
+			JTextField DataTF = new JTextField("");
+			DataTF.setFont(f);
+			DataTF.setForeground(new java.awt.Color(69, 85, 96));
+			pUser.add(DataTF);
+			pUser.add(new JLabel(""));
+			
+			pUser.add(new JLabel(""));
+			pUser.add(new JLabel(""));
+			pUser.add(new JLabel(""));
+			pUser.add(new JLabel(""));
+			JButton inviaU = new JButton("Invia");
+			inviaU.setBackground(Color.white);
+			inviaU.setForeground(new java.awt.Color(69, 85, 96));
+			inviaU.setFont(f);
+			inviaU.setFocusPainted(false);
+			pUser.add(inviaU);
+			
+			inviaU.addActionListener(this); // TO-DO
+			
+			JDialog jDialog= new JDialog(this, "Aggiungi Utente"); // JDialog name
+			jDialog.setContentPane(pUser);
+	
+			jDialog.setResizable(false);
+			jDialog.setSize(600,400); //JDialog size
+			jDialog.setLocationRelativeTo(null);
+	
+	        jDialog.setVisible(true);
+	        
+		}
+		
+		if(e.getSource() == NewBookBT) {
+			
+			Font f = new Font("Default",Font.PLAIN,15);
+			
+			JPanel pBook = new JPanel(new GridLayout(7,5,0,30));
+			
+			pBook.setBackground(new java.awt.Color(253, 185, 19)); 
+			pBook.setFont(f);
+			
+			pBook.add(new JLabel(""));
+			pBook.add(new JLabel(""));
+			pBook.add(new JLabel(""));
+			pBook.add(new JLabel(""));
+			pBook.add(new JLabel(""));
+			
+			pBook.add(new JLabel(""));
+			JLabel ISBN = new JLabel("ISBN");
+			ISBN.setFont(f);
+			ISBN.setForeground(new java.awt.Color(69, 85, 96));
+			pBook.add(ISBN);
+			pBook.add(new JLabel(""));
+			JTextField ISBNTF = new JTextField("");
+			ISBNTF.setFont(f);
+			ISBNTF.setForeground(new java.awt.Color(69, 85, 96));
+			pBook.add(ISBNTF);
+			pBook.add(new JLabel(""));
+			
+			pBook.add(new JLabel(""));
+			JLabel nome = new JLabel("Nome");
+			nome.setFont(f);
+			nome.setForeground(new java.awt.Color(69, 85, 96));
+			pBook.add(nome);
+			pBook.add(new JLabel(""));
+			JTextField NomeTF = new JTextField("");
+			NomeTF.setFont(f);
+			NomeTF.setForeground(new java.awt.Color(69, 85, 96));
+			pBook.add(NomeTF);
+			pBook.add(new JLabel(""));
+			
+			pBook.add(new JLabel(""));
+			JLabel Genere = new JLabel("Genere");
+			Genere.setFont(f);
+			Genere.setForeground(new java.awt.Color(69, 85, 96));
+			pBook.add(Genere);
+			pBook.add(new JLabel(""));
+			JTextField GenereTF = new JTextField("");
+			GenereTF.setFont(f);
+			GenereTF.setForeground(new java.awt.Color(69, 85, 96));
+			pBook.add(GenereTF);
+			pBook.add(new JLabel(""));
+			
+			pBook.add(new JLabel(""));
+			JLabel Autore = new JLabel("Autore");
+			Autore.setFont(f);
+			Autore.setForeground(new java.awt.Color(69, 85, 96));
+			pBook.add(Autore);
+			pBook.add(new JLabel(""));
+			JTextField AutoreTF = new JTextField("");
+			AutoreTF.setFont(f);
+			AutoreTF.setForeground(new java.awt.Color(69, 85, 96));
+			pBook.add(AutoreTF);
+			pBook.add(new JLabel(""));
+
+			pBook.add(new JLabel(""));
+			JLabel Pagine = new JLabel("Pagine");
+			Pagine.setFont(f);
+			Pagine.setForeground(new java.awt.Color(69, 85, 96));
+			pBook.add(Pagine);
+			pBook.add(new JLabel(""));
+			JTextField PagineTF = new JTextField("");
+			PagineTF.setFont(f);
+			PagineTF.setForeground(new java.awt.Color(69, 85, 96));
+			pBook.add(PagineTF);
+			pBook.add(new JLabel(""));
+			
+			pBook.add(new JLabel(""));
+			pBook.add(new JLabel(""));
+			pBook.add(new JLabel(""));
+			pBook.add(new JLabel(""));
+			JButton inviaL = new JButton("Invia");
+			inviaL.setBackground(Color.white);
+			inviaL.setForeground(new java.awt.Color(69, 85, 96));
+			inviaL.setFont(f);
+			inviaL.setFocusPainted(false);
+			pBook.add(inviaL);
+			
+			inviaL.addActionListener(this); // TO-DO
+			
+			JDialog jDialog= new JDialog(this, "Aggiungi Libro"); // JDialog name
+			jDialog.setContentPane(pBook);
+	
+			jDialog.setResizable(false);
+			jDialog.setSize(600,400); //JDialog size
+			jDialog.setLocationRelativeTo(null);
+	
+	        jDialog.setVisible(true);
+	        
 		}
 	}
 	
-
 	
 	
 	public static void main(String[] args) {
