@@ -40,7 +40,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 	private JButton confirm;
 	private JButton close;
 	private URL url;
-	
+	private String CodOp;
 	
 	private	JButton NewUserBT;
 	private	JButton NewBookBT;
@@ -50,9 +50,10 @@ public class HomepageFrame extends JFrame implements ActionListener{
 	private JButton AboutBT;
 	
 
-	public HomepageFrame() {
+	public HomepageFrame(String CodOp) {
 		super("Homepage Ricerca");
 		
+		this.CodOp=CodOp;
 		Font f = new Font("Default",Font.PLAIN,18);
 		Font f2 = new Font("Default",Font.PLAIN,8);
 		options = new String[] {"ISBN","Titolo","Genere","Autore"};		
@@ -98,7 +99,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
         AboutBT.setFocusPainted(false);
         AboutBT.setBorderPainted(false);
 		
-		searchTF = new JTextField("");
+		searchTF = new JTextField("ALL");
 		searchTF.setFont(f);
 		searchTF.setForeground(new java.awt.Color(69, 85, 96));
 		
@@ -258,22 +259,46 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		if (e.getSource() == confirm) {
 			try {
 				ObjectMapper om = new ObjectMapper();
-				url=new URL("http://2.224.243.66:8080/Libro");
+				String field = searchTF.getText().toString().replace(" ", "-");
+				if(field.equals(new String("ALL"))) {
+					
+					url=new URL("http://2.224.243.66:8080/Libro");
+				}
+				else {
+					if (typeCB.getSelectedIndex() == 0) {
+						//ISBN
+						url=new URL(String.format("http://2.224.243.66:8080/Libro/byISBN?ISBN=%s",field));
+					}
+					else if	(typeCB.getSelectedIndex() == 1)
+					{
+						//Titolo
+						url=new URL(String.format("http://2.224.243.66:8080/Libro/byTitolo?titolo=%s",field));
+					}
+					else if	(typeCB.getSelectedIndex() == 2) {
+						//Genere
+						url=new URL(String.format("http://2.224.243.66:8080/Libro/byGenere?genere=%s",field));
+					}
+					else if (typeCB.getSelectedIndex() == 3) {
+						//Autore
+						url=new URL(String.format("http://2.224.243.66:8080/Libro/byAutore?autore=%s",field));
+					}
+				}
 				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 				BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-				
-					
 				Libro[] libro = om.readValue(read.readLine(),Libro[].class);
-				
 				ArrayList<Libro> data = new ArrayList<Libro>(Arrays.asList(libro));
 				
-				
-				new TableSearch(data);
+				if (!data.isEmpty()){
+					new TableSearch(data);
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Nessun riscontro");
+				}
 				
 			} catch (MalformedURLException e1) {
 				e1.printStackTrace();
 			} catch (IOException e1) {
-				e1.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Dio porco non va un cazzo\n"+  e1.toString());
 			}								
 		}
 		
@@ -489,12 +514,15 @@ public class HomepageFrame extends JFrame implements ActionListener{
 	        jDialog.setVisible(true);
 	        
 		}
+		if(e.getSource()==SearchUserBT) {
+			//TODO
+		}
 	}
 	
 	
 	
 	public static void main(String[] args) {
-		new HomepageFrame();
+		new HomepageFrame("AA1111");
 		
 		
 	}

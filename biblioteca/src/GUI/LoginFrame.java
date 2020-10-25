@@ -40,7 +40,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		
 		
 		
-		userTF = new JTextField("");
+		userTF = new JTextField("CodOp");
 		userTF.setPreferredSize( new Dimension( 120, 24 ) );
 		
 		passwordF = new JPasswordField(10);
@@ -61,21 +61,25 @@ public class LoginFrame extends JFrame implements ActionListener{
 				 */
 				 
 				try {
-					URL url=new URL(String.format("http://2.224.243.66:8080/login?user=%s&password=%s",userTF.getText(),passwordF.getPassword()));
+					@SuppressWarnings("deprecation")
+					URL url=new URL(String.format("http://2.224.243.66:8080/login?user=%s&password=%s",userTF.getText(),passwordF.getText()));
 					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 					connection.setRequestMethod("POST");
 					BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 					System.out.println(read.readLine());
+					rootPane.setVisible(false);
+					rootPane.setEnabled(false);
+					new HomepageFrame(userTF.getText());
 				} catch (MalformedURLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				
+					JOptionPane.showMessageDialog(rootPane, "Operatore non autorizzato");
 				}
+				
 					
 				 
-				new HomepageFrame();
+				
 			}
 		});
 		
