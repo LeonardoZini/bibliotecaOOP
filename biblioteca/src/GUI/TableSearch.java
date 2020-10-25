@@ -51,11 +51,15 @@ public class TableSearch extends JFrame{
 		confirm.setBackground(new java.awt.Color(253, 185, 19));
 		confirm.setForeground(new java.awt.Color(69, 85, 96));
 		confirm.setFont(f);
+		confirm.setFocusPainted(false);
+		confirm.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
 		
-		JButton close = new JButton("Close");
+		JButton close = new JButton("Esci");
 		close.setBackground(new java.awt.Color(253, 185, 19));
 		close.setForeground(new java.awt.Color(69, 85, 96));
 		close.setFont(f);
+		close.setFocusPainted(false);
+		close.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
 		close.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -95,7 +99,68 @@ public class TableSearch extends JFrame{
 			public void actionPerformed(ActionEvent arg0) {
 				// TODO Auto-generated method stub
 				if(table.getSelectedRow()<0) {
-					JOptionPane.showMessageDialog(null, "Mannaggia la puttana seleziona una riga");
+					
+					Font f = new Font("Default",Font.PLAIN,15);
+					Font ft = new Font("Default",Font.PLAIN,15);
+					
+					JPanel prenota = new JPanel(new GridLayout(3,3,0,50));
+					
+					prenota.setBackground(Color.white); 
+					prenota.setFont(f);
+					
+					JButton orange = new JButton();
+					orange.setBackground(new java.awt.Color(253, 185, 19));
+					orange.setFocusPainted(false);
+					orange.setBorderPainted(false);
+					JButton orange1 = new JButton();
+					orange1.setBackground(new java.awt.Color(253, 185, 19));
+					orange1.setFocusPainted(false);
+					orange1.setBorderPainted(false);
+					JButton orange2 = new JButton();
+					orange2.setBackground(new java.awt.Color(253, 185, 19));
+					orange2.setFocusPainted(false);
+					orange2.setBorderPainted(false);
+					
+					JButton esci = new JButton("Esci");
+					esci.setBackground(new java.awt.Color(253, 185, 19));
+					esci.setForeground(new java.awt.Color(69, 85, 96));
+					esci.setFont(f);
+					esci.setFocusPainted(false);
+					esci.setBorderPainted(false);
+					
+					prenota.add(orange);
+					prenota.add(orange1);
+					prenota.add(orange2);
+					
+					prenota.add(new JLabel(""));
+					JLabel testo = new JLabel("Selezionare una riga!");
+					testo.setFont(ft);
+					testo.setForeground(new java.awt.Color(69, 85, 96));
+					prenota.add(testo);
+					prenota.add(new JLabel(""));
+					
+					prenota.add(new JLabel(""));
+					prenota.add(new JLabel(""));
+					prenota.add(esci);
+					
+					
+					
+					JDialog jDialog = new JDialog();
+					jDialog.setContentPane(prenota);
+					
+			
+					jDialog.setResizable(false);
+					jDialog.setSize(550,200); //JDialog size
+					jDialog.setLocationRelativeTo(null);
+					jDialog.setUndecorated(true);
+			        jDialog.setVisible(true);
+			        
+			        esci.addActionListener(new ActionListener() {
+					    public void actionPerformed(ActionEvent e)
+					    {
+					        jDialog.dispose();
+					    }
+					});
 					
 				}
 				else {

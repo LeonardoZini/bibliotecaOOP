@@ -63,7 +63,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		confirm.setForeground(new java.awt.Color(69, 85, 96));
 		confirm.setFont(f);
 		confirm.setFocusPainted(false);
-		confirm.setBorderPainted(false);
+		confirm.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
 		
 		NewUserBT = new JButton("Aggiungi Utente");
 		NewBookBT = new JButton("Aggiungi Libro");
@@ -74,22 +74,22 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		NewUserBT.setForeground(new java.awt.Color(69, 85, 96));
 		NewUserBT.setFont(f);
 		NewUserBT.setFocusPainted(false);
-        NewUserBT.setBorderPainted(false);
+        NewUserBT.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
 		NewBookBT.setBackground(new java.awt.Color(253, 185, 19));
 		NewBookBT.setForeground(new java.awt.Color(69, 85, 96));
 		NewBookBT.setFont(f);
 		NewBookBT.setFocusPainted(false);
-        NewBookBT.setBorderPainted(false);
+		NewBookBT.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
 		SearchUserBT.setBackground(new java.awt.Color(253, 185, 19));
 		SearchUserBT.setForeground(new java.awt.Color(69, 85, 96));
 		SearchUserBT.setFont(f);
 		SearchUserBT.setFocusPainted(false);
-        SearchUserBT.setBorderPainted(false);
+		SearchUserBT.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
 		BooksBT.setBackground(new java.awt.Color(253, 185, 19));
 		BooksBT.setForeground(new java.awt.Color(69, 85, 96));
 		BooksBT.setFont(f);
         BooksBT.setFocusPainted(false);
-        BooksBT.setBorderPainted(false);
+        BooksBT.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
 		
 		AboutBT = new JButton("             About");
 		AboutBT.setBackground(Color.white);
@@ -117,12 +117,12 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		AboutBT.addActionListener(this);
 		
 		//------------------------- Close Button
-		close = new JButton("Close");
+		close = new JButton("Esci");
 		close.setBackground(new java.awt.Color(253, 185, 19));
 		close.setForeground(new java.awt.Color(69, 85, 96));
 		close.setFont(f);
 		close.setFocusPainted(false);
-		close.setBorderPainted(false);
+		close.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
 
 		close.addActionListener(new ActionListener() {
 		    public void actionPerformed(ActionEvent e)
@@ -333,16 +333,49 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			
 			Font f = new Font("Default",Font.PLAIN,15);
 			
-			JPanel pUser = new JPanel(new GridLayout(6,5,0,40));
+			JPanel pUser = new JPanel(new GridLayout(6,5,0,50));
 			
-			pUser.setBackground(new java.awt.Color(253, 185, 19)); 
+			pUser.setBackground(Color.white); 
 			pUser.setFont(f);
 			
-			pUser.add(new JLabel(""));
-			pUser.add(new JLabel(""));
-			pUser.add(new JLabel(""));
-			pUser.add(new JLabel(""));
-			pUser.add(new JLabel(""));
+			JButton orange = new JButton();
+			orange.setBackground(new java.awt.Color(253, 185, 19));
+			orange.setFocusPainted(false);
+			orange.setBorderPainted(false);
+			JButton orange1 = new JButton();
+			orange1.setBackground(new java.awt.Color(253, 185, 19));
+			orange1.setFocusPainted(false);
+			orange1.setBorderPainted(false);
+			JButton orange2 = new JButton();
+			orange2.setBackground(new java.awt.Color(253, 185, 19));
+			orange2.setFocusPainted(false);
+			orange2.setBorderPainted(false);
+			JButton orange3 = new JButton();
+			orange3.setBackground(new java.awt.Color(253, 185, 19));
+			orange3.setFocusPainted(false);
+			orange3.setBorderPainted(false);
+			JButton orange4 = new JButton();
+			orange4.setBackground(new java.awt.Color(253, 185, 19));
+			orange4.setFocusPainted(false);
+			orange4.setBorderPainted(false);
+			orange.setEnabled(false);
+			orange1.setEnabled(false);
+			orange2.setEnabled(false);
+			orange3.setEnabled(false);
+			orange4.setEnabled(false);
+			
+			close = new JButton("Esci");
+			close.setBackground(new java.awt.Color(253, 185, 19));
+			close.setForeground(new java.awt.Color(69, 85, 96));
+			close.setFont(f);
+			close.setFocusPainted(false);
+			close.setBorderPainted(false);
+			
+			pUser.add(orange);
+			pUser.add(orange1);
+			pUser.add(orange2);
+			pUser.add(orange3);
+			pUser.add(orange4);
 			
 			pUser.add(new JLabel(""));
 			JLabel nome = new JLabel("Nome");
@@ -392,27 +425,40 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			pUser.add(DataTF);
 			pUser.add(new JLabel(""));
 			
-			pUser.add(new JLabel(""));
+			pUser.add(close);
 			pUser.add(new JLabel(""));
 			pUser.add(new JLabel(""));
 			pUser.add(new JLabel(""));
 			JButton inviaU = new JButton("Invia");
-			inviaU.setBackground(Color.white);
+			inviaU.setBackground(new java.awt.Color(253, 185, 19));
 			inviaU.setForeground(new java.awt.Color(69, 85, 96));
 			inviaU.setFont(f);
+			inviaU.setBorderPainted(false);
 			inviaU.setFocusPainted(false);
 			pUser.add(inviaU);
-			
-			inviaU.addActionListener(this); // TO-DO
 			
 			JDialog jDialog= new JDialog(this, "Aggiungi Utente"); // JDialog name
 			jDialog.setContentPane(pUser);
 	
 			jDialog.setResizable(false);
-			jDialog.setSize(600,400); //JDialog size
+			jDialog.setSize(800,500); //JDialog size
 			jDialog.setLocationRelativeTo(null);
-	
+			jDialog.setUndecorated(true);
 	        jDialog.setVisible(true);
+	        
+	        close.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e)
+			    {
+			        jDialog.dispose();
+			    }
+			});
+	        
+	        inviaU.addActionListener(new ActionListener() {  // TO-DO l'action listener per mandare al server
+			    public void actionPerformed(ActionEvent e)
+			    {
+			    	jDialog.dispose();
+			    }
+			});
 	        
 		}
 		
@@ -420,16 +466,49 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			
 			Font f = new Font("Default",Font.PLAIN,15);
 			
-			JPanel pBook = new JPanel(new GridLayout(7,5,0,30));
+			JPanel pBook = new JPanel(new GridLayout(7,5,0,35));
 			
-			pBook.setBackground(new java.awt.Color(253, 185, 19)); 
+			pBook.setBackground(Color.white); 
 			pBook.setFont(f);
 			
-			pBook.add(new JLabel(""));
-			pBook.add(new JLabel(""));
-			pBook.add(new JLabel(""));
-			pBook.add(new JLabel(""));
-			pBook.add(new JLabel(""));
+			JButton orange = new JButton();
+			orange.setBackground(new java.awt.Color(253, 185, 19));
+			orange.setFocusPainted(false);
+			orange.setBorderPainted(false);
+			JButton orange1 = new JButton();
+			orange1.setBackground(new java.awt.Color(253, 185, 19));
+			orange1.setFocusPainted(false);
+			orange1.setBorderPainted(false);
+			JButton orange2 = new JButton();
+			orange2.setBackground(new java.awt.Color(253, 185, 19));
+			orange2.setFocusPainted(false);
+			orange2.setBorderPainted(false);
+			JButton orange3 = new JButton();
+			orange3.setBackground(new java.awt.Color(253, 185, 19));
+			orange3.setFocusPainted(false);
+			orange3.setBorderPainted(false);
+			JButton orange4 = new JButton();
+			orange4.setBackground(new java.awt.Color(253, 185, 19));
+			orange4.setFocusPainted(false);
+			orange4.setBorderPainted(false);
+			orange.setEnabled(false);
+			orange1.setEnabled(false);
+			orange2.setEnabled(false);
+			orange3.setEnabled(false);
+			orange4.setEnabled(false);
+			
+			close = new JButton("Esci");
+			close.setBackground(new java.awt.Color(253, 185, 19));
+			close.setForeground(new java.awt.Color(69, 85, 96));
+			close.setFont(f);
+			close.setFocusPainted(false);
+			close.setBorderPainted(false);
+			
+			pBook.add(orange);
+			pBook.add(orange1);
+			pBook.add(orange2);
+			pBook.add(orange3);
+			pBook.add(orange4);
 			
 			pBook.add(new JLabel(""));
 			JLabel ISBN = new JLabel("ISBN");
@@ -491,15 +570,16 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			pBook.add(PagineTF);
 			pBook.add(new JLabel(""));
 			
-			pBook.add(new JLabel(""));
+			pBook.add(close);
 			pBook.add(new JLabel(""));
 			pBook.add(new JLabel(""));
 			pBook.add(new JLabel(""));
 			JButton inviaL = new JButton("Invia");
-			inviaL.setBackground(Color.white);
+			inviaL.setBackground(new java.awt.Color(253, 185, 19));
 			inviaL.setForeground(new java.awt.Color(69, 85, 96));
 			inviaL.setFont(f);
 			inviaL.setFocusPainted(false);
+			inviaL.setBorderPainted(false);
 			pBook.add(inviaL);
 			
 			inviaL.addActionListener(this); // TO-DO
@@ -508,12 +588,27 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			jDialog.setContentPane(pBook);
 	
 			jDialog.setResizable(false);
-			jDialog.setSize(600,400); //JDialog size
+			jDialog.setSize(800,500); //JDialog size
 			jDialog.setLocationRelativeTo(null);
-	
+			jDialog.setUndecorated(true);
 	        jDialog.setVisible(true);
 	        
+	        close.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e)
+			    {
+			        jDialog.dispose();
+			    }
+			});
+	        
+	        inviaL.addActionListener(new ActionListener() {  // TO-DO l'action listener per mandare al server
+			    public void actionPerformed(ActionEvent e)
+			    {
+			    	jDialog.dispose();
+			    }
+			});
+	        
 		}
+		
 		if(e.getSource()==SearchUserBT) {
 			//TODO
 		}

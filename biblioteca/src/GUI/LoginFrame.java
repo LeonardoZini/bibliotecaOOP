@@ -37,8 +37,9 @@ public class LoginFrame extends JFrame implements ActionListener{
 	
 	public LoginFrame() {
 		
+		Font f = new Font("Default",Font.PLAIN,18);
 		
-		
+		JLabel logo = new JLabel(new ImageIcon("./GUI/Piccolo_Logo.PNG")); 
 		
 		userTF = new JTextField("CodOp");
 		userTF.setPreferredSize( new Dimension( 120, 24 ) );
@@ -48,6 +49,11 @@ public class LoginFrame extends JFrame implements ActionListener{
 		
 		okBT= new JButton("Accedi");
 		okBT.setPreferredSize( new Dimension( 120, 24 ) );
+		okBT.setBackground(new java.awt.Color(253, 185, 19));
+		okBT.setForeground(new java.awt.Color(69, 85, 96));
+		okBT.setFont(f);
+		okBT.setFocusPainted(false);
+		okBT.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
 		
 		okBT.addActionListener(new ActionListener() {
 			
@@ -74,18 +80,74 @@ public class LoginFrame extends JFrame implements ActionListener{
 					e1.printStackTrace();
 				} catch (IOException e1) {
 				
-					JOptionPane.showMessageDialog(rootPane, "Operatore non autorizzato");
-				}
-				
+					Font f = new Font("Default",Font.PLAIN,15);
+					Font ft = new Font("Default",Font.PLAIN,15);
 					
-				 
-				
+					JPanel wUser = new JPanel(new GridLayout(3,3,0,50));
+					
+					wUser.setBackground(Color.white); 
+					wUser.setFont(f);
+					
+					JButton orange = new JButton();
+					orange.setBackground(new java.awt.Color(253, 185, 19));
+					orange.setFocusPainted(false);
+					orange.setBorderPainted(false);
+					JButton orange1 = new JButton();
+					orange1.setBackground(new java.awt.Color(253, 185, 19));
+					orange1.setFocusPainted(false);
+					orange1.setBorderPainted(false);
+					JButton orange2 = new JButton();
+					orange2.setBackground(new java.awt.Color(253, 185, 19));
+					orange2.setFocusPainted(false);
+					orange2.setBorderPainted(false);
+					
+					JButton esci = new JButton("Esci");
+					esci.setBackground(new java.awt.Color(253, 185, 19));
+					esci.setForeground(new java.awt.Color(69, 85, 96));
+					esci.setFont(f);
+					esci.setFocusPainted(false);
+					esci.setBorderPainted(false);
+					
+					wUser.add(orange);
+					wUser.add(orange1);
+					wUser.add(orange2);
+					
+					wUser.add(new JLabel(""));
+					JLabel testo = new JLabel("Operatore non autorizzato!");
+					testo.setFont(ft);
+					testo.setForeground(new java.awt.Color(69, 85, 96));
+					wUser.add(testo);
+					wUser.add(new JLabel(""));
+					
+					wUser.add(new JLabel(""));
+					wUser.add(new JLabel(""));
+					wUser.add(esci);
+					
+					
+					
+					JDialog jDialog = new JDialog();
+					jDialog.setContentPane(wUser);
+					
+			
+					jDialog.setResizable(false);
+					jDialog.setSize(550,200); //JDialog size
+					jDialog.setLocationRelativeTo(null);
+					jDialog.setUndecorated(true);
+			        jDialog.setVisible(true);
+			        
+			        esci.addActionListener(new ActionListener() {
+					    public void actionPerformed(ActionEvent e)
+					    {
+					        jDialog.dispose();
+					    }
+					});
+				}
 			}
 		});
 		
 		// Frame generale pagina di Login
 		JFrame p0 = new JFrame("Login");         
-		p0.setSize(new Dimension(600,600)); //dim
+		p0.setSize(new Dimension(700,700)); //dim
 
 		//Pannello da attaccare al Frame
 		JPanel p1 = new JPanel(new GridBagLayout());
@@ -93,48 +155,58 @@ public class LoginFrame extends JFrame implements ActionListener{
 		p1.setBackground(Color.WHITE);
 
 		//-------------------- Pannello centale
-		JPanel p2 = new JPanel(new GridLayout(4,4,0,70));
-		p2.setPreferredSize(new Dimension(370,370));
+		JPanel p2 = new JPanel(new GridLayout(4,5,0,90));
+		p2.setPreferredSize(new Dimension(550,550));
 		p2.setBackground(Color.WHITE);
 		
 		p2.add(new JLabel(""));
 		p2.add(new JLabel(""));
+		p2.add(logo);
 		p2.add(new JLabel(""));
 		p2.add(new JLabel(""));
 		
+		JLabel user = new JLabel("Username");
+		user.setForeground(new java.awt.Color(69, 85, 96));
+		user.setFont(f);
 		p2.add(new JLabel(""));
-		p2.add(new JLabel("Username"));
+		p2.add(user);
+		p2.add(new JLabel(""));
+		userTF.setForeground(new java.awt.Color(69, 85, 96));
+		userTF.setFont(f);
 		p2.add(userTF);
 		p2.add(new JLabel(""));
 		
+		JLabel password = new JLabel("Password");
+		password.setForeground(new java.awt.Color(69, 85, 96));
+		password.setFont(f);
 		p2.add(new JLabel(""));
-		p2.add(new JLabel("Password"));
+		p2.add(password);
+		p2.add(new JLabel(""));
+		passwordF.setForeground(new java.awt.Color(69, 85, 96));
+		passwordF.setFont(f);
 		p2.add(passwordF);
 		p2.add(new JLabel(""));
 		
 		p2.add(new JLabel(""));
 		p2.add(new JLabel(""));
-		p2.add(new JLabel(""));
 		p2.add(okBT);
-		
+		p2.add(new JLabel(""));
+		p2.add(new JLabel(""));
 		
 		
 		//---------------------
 		
-		
-
 		p1.add(p2);
 		p0.add(p1);
 		
 		
-		p2.setBorder(BorderFactory.createLineBorder(new java.awt.Color(253, 185, 19),3));
+		p2.setBorder(BorderFactory.createLineBorder(new java.awt.Color(253, 185, 19),5));
 		
 		
 		p0.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		p0.setResizable(false);
 		p0.setLocationRelativeTo(null);
 		p0.setVisible(true);  
-		
 	}
 	
 	
@@ -154,16 +226,3 @@ public class LoginFrame extends JFrame implements ActionListener{
 
 	
 }
-
-
-
-
-/*
-
-- finire bottone OK
--fare actionListener bottone OK
--finire parte PASSWORD
--abbellire design generale
-
-
-*/
