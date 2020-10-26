@@ -203,7 +203,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));
 		
-		p3.add(new JLabel(""));
+		p3.add(new JLabel("CodOp")); // TO-DO mettere nome operatore 
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));

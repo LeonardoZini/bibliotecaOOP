@@ -165,25 +165,91 @@ public class TableSearch extends JFrame{
 				}
 				else {
 					
-					int value;
-					value=JOptionPane.showConfirmDialog(null, "Vuoi prestare \""+table.getModel().getValueAt(table.getSelectedRow(), 1).toString()+"\"?"
-							,"Conferma", JOptionPane.YES_NO_OPTION);
-					if(value == 0) {
-						/*
-						 * Si, ha confermato il prestito.
-						 * Controllare che il libro non sia gia prestato
-						 * Aprire una nuova finestra form dove verrà chiesto il codieUtente, recuperate le
-						 * informazioni, stampate sul form e chiesta conferma.
-						 * Se viene confermato, quel libro risulterà in prestito da quel moemnto a quell'utente
-						 */
-						System.out.println("Processing..");
-					}
-					else {
-						/*
-						 * Non ha confermato il prestito, nulla accade, si rimane su quella pagina
-						 */
-						System.out.println("Confirm aborted...");
-					}
+					Font f = new Font("Default",Font.PLAIN,15);
+					Font ft = new Font("Default",Font.PLAIN,16);
+					
+					JPanel prenota = new JPanel(new GridLayout(3,3,0,80));
+					
+					prenota.setBackground(Color.white); 
+					prenota.setFont(f);
+					
+					JButton orange = new JButton();
+					orange.setBackground(new java.awt.Color(253, 185, 19));
+					orange.setFocusPainted(false);
+					orange.setBorderPainted(false);
+					JButton orange1 = new JButton();
+					orange1.setBackground(new java.awt.Color(253, 185, 19));
+					orange1.setFocusPainted(false);
+					orange1.setBorderPainted(false);
+					JButton orange2 = new JButton();
+					orange2.setBackground(new java.awt.Color(253, 185, 19));
+					orange2.setFocusPainted(false);
+					orange2.setBorderPainted(false);
+					
+					JButton no = new JButton("No");
+					no.setBackground(new java.awt.Color(253, 185, 19));
+					no.setForeground(new java.awt.Color(69, 85, 96));
+					no.setFont(f);
+					no.setFocusPainted(false);
+					no.setBorderPainted(false);
+					
+					JButton si = new JButton("Si");
+					si.setBackground(new java.awt.Color(253, 185, 19));
+					si.setForeground(new java.awt.Color(69, 85, 96));
+					si.setFont(f);
+					si.setFocusPainted(false);
+					si.setBorderPainted(false);
+					
+					prenota.add(orange);
+					prenota.add(orange1);
+					prenota.add(orange2);
+					
+					prenota.add(new JLabel(""));
+					JLabel testo = new JLabel("Vuoi prestare \""+table.getModel().getValueAt(table.getSelectedRow(), 1).toString()+"\"?");
+					testo.setFont(ft);
+					testo.setForeground(new java.awt.Color(69, 85, 96));
+					prenota.add(testo);
+					prenota.add(new JLabel(""));
+					
+					prenota.add(si);
+					prenota.add(new JLabel(""));
+					prenota.add(no);
+					
+					JDialog jDialog = new JDialog();
+					jDialog.setContentPane(prenota);
+					
+			
+					jDialog.setResizable(false);
+					jDialog.setSize(900,300); //JDialog size
+					jDialog.setLocationRelativeTo(null);
+					jDialog.setUndecorated(true);
+			        jDialog.setVisible(true);
+			        
+			        si.addActionListener(new ActionListener() {
+					    public void actionPerformed(ActionEvent e)
+					    {
+					    	/*                                                                                        
+					    	 * Si, ha confermato il prestito.                                                         
+					    	 * Controllare che il libro non sia gia prestato                                          
+					    	 * Aprire una nuova finestra form dove verrà chiesto il codieUtente, recuperate le        
+					    	 * informazioni, stampate sul form e chiesta conferma.                                    
+					    	 * Se viene confermato, quel libro risulterà in prestito da quel moemnto a quell'utente   
+					    	 */      
+					    	
+					    	System.out.println("Processing..");    
+					    }
+					});
+			        
+			        no.addActionListener(new ActionListener() {
+					    public void actionPerformed(ActionEvent e)
+					    {
+					    
+							// Non ha confermato il prestito, nulla accade, si rimane su quella pagina
+								
+					    	System.out.println("Confirm aborted...");
+					        jDialog.dispose();
+					    }
+					});
 					
 				}
 			}
