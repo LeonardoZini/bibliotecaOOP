@@ -54,8 +54,10 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		super("Homepage Ricerca");
 		
 		this.CodOp=CodOp;
+
 		Font f = new Font("Default",Font.PLAIN,18);
 		Font f2 = new Font("Default",Font.PLAIN,8);
+		Font ft = new Font("Default",Font.PLAIN,15);
 		options = new String[] {"ISBN","Titolo","Genere","Autore"};		
 		
 		confirm = new JButton("Cerca");
@@ -94,7 +96,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		AboutBT = new JButton("             About");
 		AboutBT.setBackground(Color.white);
 		AboutBT.setForeground(Color.black);
-		AboutBT.setFont(f);
+		AboutBT.setFont(ft);
 		AboutBT.setContentAreaFilled(false);
         AboutBT.setFocusPainted(false);
         AboutBT.setBorderPainted(false);
@@ -203,7 +205,12 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));
 		
-		p3.add(new JLabel("CodOp")); // TO-DO mettere nome operatore 
+		JLabel UserN = new JLabel();
+		UserN.setText("   Operatore:  " +CodOp);
+		UserN.setFont(ft);
+		UserN.setForeground(Color.black);
+		
+		p3.add(UserN);
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));
@@ -227,7 +234,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p2.setBackground(Color.white);
 		
 		
-		p0_0.setBorder(BorderFactory.createLineBorder(new java.awt.Color(253, 185, 19),3));
+		p0_0.setBorder(BorderFactory.createLineBorder(new java.awt.Color(253, 185, 19),4));
 		
 		
 		//------------------- Unione dei vari pannelli -> verr� settato come pannello da visualizzare
