@@ -38,8 +38,9 @@ public class LoginFrame extends JFrame implements ActionListener{
 	public LoginFrame() {
 		
 		Font f = new Font("Default",Font.PLAIN,18);
+		JFrame p0 = new JFrame("Login");
 		
-		JLabel logo = new JLabel(new ImageIcon("./GUI/Piccolo_Logo.PNG")); 
+		JLabel logo = new JLabel(new ImageIcon("./src/GUI/Piccolo_Logo.png")); 
 		
 		userTF = new JTextField("CodOp");
 		userTF.setPreferredSize( new Dimension( 120, 24 ) );
@@ -75,6 +76,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 					System.out.println(read.readLine());
 					rootPane.setVisible(false);
 					rootPane.setEnabled(false);
+					p0.dispose();
 					new HomepageFrame(userTF.getText());
 				} catch (MalformedURLException e1) {
 					e1.printStackTrace();
@@ -146,7 +148,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		});
 		
 		// Frame generale pagina di Login
-		JFrame p0 = new JFrame("Login");         
+		         
 		p0.setSize(new Dimension(700,700)); //dim
 
 		//Pannello da attaccare al Frame
