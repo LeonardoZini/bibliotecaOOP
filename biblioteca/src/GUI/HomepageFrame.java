@@ -285,6 +285,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 				}
 				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 				BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				
 				Libro[] libro = om.readValue(read.readLine(),Libro[].class);
 				ArrayList<Libro> data = new ArrayList<Libro>(Arrays.asList(libro));
 				
