@@ -54,8 +54,10 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		super("Homepage Ricerca");
 		
 		this.CodOp=CodOp;
+
 		Font f = new Font("Default",Font.PLAIN,18);
 		Font f2 = new Font("Default",Font.PLAIN,8);
+		Font ft = new Font("Default",Font.PLAIN,15);
 		options = new String[] {"ISBN","Titolo","Genere","Autore"};		
 		
 		confirm = new JButton("Cerca");
@@ -94,7 +96,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		AboutBT = new JButton("             About");
 		AboutBT.setBackground(Color.white);
 		AboutBT.setForeground(Color.black);
-		AboutBT.setFont(f);
+		AboutBT.setFont(ft);
 		AboutBT.setContentAreaFilled(false);
         AboutBT.setFocusPainted(false);
         AboutBT.setBorderPainted(false);
@@ -203,7 +205,12 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));
 		
-		p3.add(new JLabel(""));
+		JLabel UserN = new JLabel();
+		UserN.setText("   Operatore:  " +CodOp);
+		UserN.setFont(ft);
+		UserN.setForeground(Color.black);
+		
+		p3.add(UserN);
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));
 		p3.add(new JLabel(""));
@@ -227,7 +234,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p2.setBackground(Color.white);
 		
 		
-		p0_0.setBorder(BorderFactory.createLineBorder(new java.awt.Color(253, 185, 19),3));
+		p0_0.setBorder(BorderFactory.createLineBorder(new java.awt.Color(253, 185, 19),4));
 		
 		
 		//------------------- Unione dei vari pannelli -> verr� settato come pannello da visualizzare
@@ -611,7 +618,112 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		}
 		
 		if(e.getSource()==SearchUserBT) {
-			//TODO
+			
+			Font f = new Font("Default",Font.PLAIN,15);
+			
+			JPanel sUser = new JPanel(new GridLayout(5,5,0,30));
+			
+			sUser.setBackground(Color.white); 
+			sUser.setFont(f);
+			
+			JButton orange = new JButton();
+			orange.setBackground(new java.awt.Color(253, 185, 19));
+			orange.setFocusPainted(false);
+			orange.setBorderPainted(false);
+			JButton orange1 = new JButton();
+			orange1.setBackground(new java.awt.Color(253, 185, 19));
+			orange1.setFocusPainted(false);
+			orange1.setBorderPainted(false);
+			JButton orange2 = new JButton();
+			orange2.setBackground(new java.awt.Color(253, 185, 19));
+			orange2.setFocusPainted(false);
+			orange2.setBorderPainted(false);
+			JButton orange3 = new JButton();
+			orange3.setBackground(new java.awt.Color(253, 185, 19));
+			orange3.setFocusPainted(false);
+			orange3.setBorderPainted(false);
+			JButton orange4 = new JButton();
+			orange4.setBackground(new java.awt.Color(253, 185, 19));
+			orange4.setFocusPainted(false);
+			orange4.setBorderPainted(false);
+			orange.setEnabled(false);
+			orange1.setEnabled(false);
+			orange2.setEnabled(false);
+			orange3.setEnabled(false);
+			orange4.setEnabled(false);
+			
+			close = new JButton("Esci");
+			close.setBackground(new java.awt.Color(253, 185, 19));
+			close.setForeground(new java.awt.Color(69, 85, 96));
+			close.setFont(f);
+			close.setFocusPainted(false);
+			close.setBorderPainted(false);
+			
+			sUser.add(orange);
+			sUser.add(orange1);
+			sUser.add(orange2);
+			sUser.add(orange3);
+			sUser.add(orange4);
+			
+			sUser.add(new JLabel(""));
+			sUser.add(new JLabel(""));
+			sUser.add(new JLabel(""));
+			sUser.add(new JLabel(""));
+			sUser.add(new JLabel(""));
+			
+			sUser.add(new JLabel(""));
+			JLabel CU = new JLabel("Inserire Codice Utente");
+			CU.setFont(f);
+			CU.setForeground(new java.awt.Color(69, 85, 96));
+			sUser.add(CU);
+			sUser.add(new JLabel(""));
+			JTextField CUTF = new JTextField("");
+			CUTF.setFont(f);
+			CUTF.setForeground(new java.awt.Color(69, 85, 96));
+			sUser.add(CUTF);
+			sUser.add(new JLabel(""));
+
+			sUser.add(new JLabel(""));
+			sUser.add(new JLabel(""));
+			sUser.add(new JLabel(""));
+			sUser.add(new JLabel(""));
+			sUser.add(new JLabel(""));
+			
+			
+			sUser.add(close);
+			sUser.add(new JLabel(""));
+			sUser.add(new JLabel(""));
+			sUser.add(new JLabel(""));
+			JButton inviaU = new JButton("Invia");
+			inviaU.setBackground(new java.awt.Color(253, 185, 19));
+			inviaU.setForeground(new java.awt.Color(69, 85, 96));
+			inviaU.setFont(f);
+			inviaU.setBorderPainted(false);
+			inviaU.setFocusPainted(false);
+			sUser.add(inviaU);
+			
+			JDialog jDialog= new JDialog(this, "Cerca Utente"); // JDialog name
+			jDialog.setContentPane(sUser);
+	
+			jDialog.setResizable(false);
+			jDialog.setSize(750,300); //JDialog size
+			jDialog.setLocationRelativeTo(null);
+			jDialog.setUndecorated(true);
+	        jDialog.setVisible(true);
+	        
+	        close.addActionListener(new ActionListener() {
+			    public void actionPerformed(ActionEvent e)
+			    {
+			        jDialog.dispose();
+			    }
+			});
+	        
+	        inviaU.addActionListener(new ActionListener() {  // TO-DO l'action listener per mandare al server
+			    public void actionPerformed(ActionEvent e)
+			    {
+			    	jDialog.dispose();
+			    }
+			});
 		}
 	}
 	

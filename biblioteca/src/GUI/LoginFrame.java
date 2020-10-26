@@ -202,7 +202,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		p0.add(p1);
 		
 		
-		p2.setBorder(BorderFactory.createLineBorder(new java.awt.Color(253, 185, 19),5));
+		p2.setBorder(BorderFactory.createLineBorder(new java.awt.Color(253, 185, 19),7));
 		
 		
 		p0.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
