@@ -134,7 +134,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		});
 		//--------------------------
 		
-		JLabel logo = new JLabel(new ImageIcon("./GUI/Logo_BT.PNG")); 
+		JLabel logo = new JLabel(new ImageIcon("./src/GUI/Logo_BT.png")); 
 		
 		//--------------------------Pannello della ricerca 
 	
@@ -611,7 +611,41 @@ public class HomepageFrame extends JFrame implements ActionListener{
 	        inviaL.addActionListener(new ActionListener() {  // TO-DO l'action listener per mandare al server
 			    public void actionPerformed(ActionEvent e)
 			    {
-			    	jDialog.dispose();
+			    	
+			    	try{
+			    		String isbn=ISBNTF.getText();
+			    		String titolo = NomeTF.getText();
+			    		String genere = GenereTF.getText();
+			    		String autore= AutoreTF.getText();
+			    		String pagine = PagineTF.getText();
+			    		
+			    		System.out.println(String.format("http://2.224.243.66:8080/insert/libro?ISBN=%s&titolo=%s&"
+			    				+ "genere=%s&autore=%s&pagine%s",isbn,titolo,genere,autore,pagine));
+			    		
+			    		
+			    		url=new URL(String.format("http://2.224.243.66:8080/insert/libro?ISBN=%s&titolo=%s&"
+			    				+ "genere=%s&pagine=%s&autore=%s&",isbn,titolo,genere,pagine,autore));
+			    		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			    		
+						connection.setRequestMethod("POST");
+						
+						if(connection.getResponseCode()==200) {
+							JOptionPane.showMessageDialog(rootPane, "Libro inserito con successo!");
+						}
+						else if(connection.getResponseCode()==403) {
+							JOptionPane.showMessageDialog(rootPane, "ISBN gia presente nel database");
+						}
+						else {
+							JOptionPane.showMessageDialog(rootPane, "Errore nell'inserimento del libro!");
+						}
+						
+		
+			    	}
+			    	catch(IOException e1) {
+			    		System.out.println("WTF are u doing");
+			    		e1.printStackTrace();
+			    	
+			    	}
 			    }
 			});
 	        

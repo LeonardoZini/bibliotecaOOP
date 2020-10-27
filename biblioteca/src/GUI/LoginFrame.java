@@ -69,11 +69,12 @@ public class LoginFrame extends JFrame implements ActionListener{
 				 
 				try {
 					@SuppressWarnings("deprecation")
-					URL url=new URL(String.format("http://2.224.243.66:8080/login?user=%s&password=%s",userTF.getText(),passwordF.getText()));
+					URL url=new URL(String.format("http://2.224.243.66:8080/login?user=%s&password=%s",userTF.getText(),passwordF.getText().hashCode()));
 					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 					connection.setRequestMethod("POST");
 					BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 					System.out.println(read.readLine());
+					
 					rootPane.setVisible(false);
 					rootPane.setEnabled(false);
 					p0.dispose();
