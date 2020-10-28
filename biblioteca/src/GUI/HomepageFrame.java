@@ -13,11 +13,15 @@ import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import DBManager.DBManager;
@@ -339,6 +343,9 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		
 		if(e.getSource() == NewUserBT) {
 			
+			/*
+			 * Creazione form per inserimento nuovo utente
+			 */
 			Font f = new Font("Default",Font.PLAIN,15);
 			
 			JPanel pUser = new JPanel(new GridLayout(6,5,0,50));
@@ -426,12 +433,21 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			Data.setFont(f);
 			Data.setForeground(new java.awt.Color(69, 85, 96));
 			pUser.add(Data);
+			
 			pUser.add(new JLabel(""));
-			JTextField DataTF = new JTextField("");
+			JFormattedTextField DataTF = new JFormattedTextField(new SimpleDateFormat("yyyy-MM-dd"));
+			DataTF.setText("yyyy-mm-dd");
 			DataTF.setFont(f);
+			DataTF.addFocusListener(new FocusAdapter() {
+				 public void focusGained(FocusEvent e2) {
+					DataTF.setText("");
+				 }
+				
+			});
 			DataTF.setForeground(new java.awt.Color(69, 85, 96));
 			pUser.add(DataTF);
 			pUser.add(new JLabel(""));
+			
 			
 			pUser.add(close);
 			pUser.add(new JLabel(""));
@@ -461,16 +477,55 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			    }
 			});
 	        
-	        inviaU.addActionListener(new ActionListener() {  // TO-DO l'action listener per mandare al server
+	        inviaU.addActionListener(new ActionListener() {  
 			    public void actionPerformed(ActionEvent e)
-			    {
-			    	jDialog.dispose();
+{
+			    	/*
+			    	 * Action listener per mandare al server le informazioni del nuovo utente
+			    	 */
+			    	
+			    	try{
+			    		String nome=NomeTF.getText();
+			    		String cognome = CognomeTF.getText();
+			    		String data_nascita = DataTF.getText();
+			    		String cF= CFTF.getText();
+			    		
+			    		System.out.println(String.format("http://2.224.243.66:8080/insert/utente?nome=%s&cognome=%s&"
+			    				+ "cf=%s&data-nascita=%s",nome,cognome,data_nascita,cF));
+			    		
+			    		
+			    		url=new URL(String.format("http://2.224.243.66:8080/insert/utente?nome=%s&cognome=%s&"
+			    				+ "cf=%s&data-nascita=%s",nome,cognome,cF,data_nascita));
+			    		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+			    		
+						connection.setRequestMethod("POST");
+						
+						if(connection.getResponseCode()==200) {
+							JOptionPane.showMessageDialog(rootPane, "Utente inserito con successo!");
+						}
+						else if(connection.getResponseCode()==403) {
+							JOptionPane.showMessageDialog(rootPane, "Errore interno");
+						}
+						else {
+							JOptionPane.showMessageDialog(rootPane, "Errore nell'inserimento dell'utente!");
+						}
+						
+		
+			    	}
+			    	catch(IOException e1) {
+			    		System.out.println("WTF are u doing");
+			    		e1.printStackTrace();
+			    	
+			    	}
 			    }
 			});
 	        
 		}
 		
 		if(e.getSource() == NewBookBT) {
+			/*
+			 * Creazione jDialog per creare form per inserire un nuovo libro
+			 */
 			
 			Font f = new Font("Default",Font.PLAIN,15);
 			
@@ -608,10 +663,12 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			    }
 			});
 	        
-	        inviaL.addActionListener(new ActionListener() {  // TO-DO l'action listener per mandare al server
+	        inviaL.addActionListener(new ActionListener() {  
 			    public void actionPerformed(ActionEvent e)
 			    {
-			    	
+			    	/*
+			    	 * Action listener per mandare al server le informazioni di un nuovo libro
+			    	 */
 			    	try{
 			    		String isbn=ISBNTF.getText();
 			    		String titolo = NomeTF.getText();
