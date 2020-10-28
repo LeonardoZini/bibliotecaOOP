@@ -9,6 +9,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.*;
@@ -68,8 +72,10 @@ public class LoginFrame extends JFrame implements ActionListener{
 				 */
 				 
 				try {
-					@SuppressWarnings("deprecation")
-					URL url=new URL(String.format("http://2.224.243.66:8080/login?user=%s&password=%s",userTF.getText(),passwordF.getText().hashCode()));
+					
+					
+					@SuppressWarnings("deprecation")					
+					URL url=new URL(String.format("http://2.224.243.66:8080/login?user=%s&password=%s",userTF.getText(),passwordF.getText()));
 					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 					connection.setRequestMethod("POST");
 					BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
