@@ -48,7 +48,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 	
 	private	JButton NewUserBT;
 	private	JButton NewBookBT;
-	private	JButton SearchUserBT;
+	private	JButton closeLoanBT;
 	private	JButton BooksBT;
 	
 	private JButton AboutBT;
@@ -73,7 +73,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		
 		NewUserBT = new JButton("Aggiungi Utente");
 		NewBookBT = new JButton("Aggiungi Libro");
-		SearchUserBT = new JButton("Cerca Utente");
+		closeLoanBT = new JButton("Chiudi prestito");
 		BooksBT = new JButton("Visualizza Prestiti");
 		
 		NewUserBT.setBackground(new java.awt.Color(253, 185, 19));
@@ -86,11 +86,11 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		NewBookBT.setFont(f);
 		NewBookBT.setFocusPainted(false);
 		NewBookBT.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
-		SearchUserBT.setBackground(new java.awt.Color(253, 185, 19));
-		SearchUserBT.setForeground(new java.awt.Color(69, 85, 96));
-		SearchUserBT.setFont(f);
-		SearchUserBT.setFocusPainted(false);
-		SearchUserBT.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
+		closeLoanBT.setBackground(new java.awt.Color(253, 185, 19));
+		closeLoanBT.setForeground(new java.awt.Color(69, 85, 96));
+		closeLoanBT.setFont(f);
+		closeLoanBT.setFocusPainted(false);
+		closeLoanBT.setBorder(BorderFactory.createLineBorder(new java.awt.Color(69, 85, 96), 1));
 		BooksBT.setBackground(new java.awt.Color(253, 185, 19));
 		BooksBT.setForeground(new java.awt.Color(69, 85, 96));
 		BooksBT.setFont(f);
@@ -118,7 +118,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		confirm.addActionListener(this);
 		NewUserBT.addActionListener(this);
 		NewBookBT.addActionListener(this);
-		SearchUserBT.addActionListener(this);
+		closeLoanBT.addActionListener(this);
 		BooksBT.addActionListener(this);
 		AboutBT.addActionListener(this);
 		
@@ -169,7 +169,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		p0_0.add(NewUserBT);
 		p0_0.add(NewBookBT);
 		p0_0.add(new JLabel(""));
-		p0_0.add(SearchUserBT);
+		p0_0.add(closeLoanBT);
 		p0_0.add(BooksBT);
 		
 		
@@ -301,7 +301,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 				ArrayList<Libro> data = new ArrayList<Libro>(Arrays.asList(libro));
 				
 				if (!data.isEmpty()){
-					new TableSearch(data);
+					new TableSearch(data,CodOp);
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Nessun riscontro");
@@ -310,7 +310,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			} catch (MalformedURLException e1) {
 				e1.printStackTrace();
 			} catch (IOException e1) {
-				JOptionPane.showMessageDialog(null, "Dio porco non va un cazzo\n"+  e1.toString());
+				JOptionPane.showMessageDialog(null,   e1.toString());
 			}								
 		}
 		
@@ -708,7 +708,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 	        
 		}
 		
-		if(e.getSource()==SearchUserBT) {
+		if(e.getSource()==closeLoanBT) {
 			
 			Font f = new Font("Default",Font.PLAIN,15);
 			
@@ -812,9 +812,15 @@ public class HomepageFrame extends JFrame implements ActionListener{
 	        inviaU.addActionListener(new ActionListener() {  // TO-DO l'action listener per mandare al server
 			    public void actionPerformed(ActionEvent e)
 			    {
-			    	jDialog.dispose();
+			    	/*
+			    	 * Aprire table prestiti
+			    	 */
+			    	new LoanTable(CUTF.getText());
 			    }
 			});
+		}
+		if(e.getSource()==BooksBT) {
+			new LoanTable("ALL");
 		}
 	}
 	

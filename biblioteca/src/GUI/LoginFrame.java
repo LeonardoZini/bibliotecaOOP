@@ -3,6 +3,8 @@ package GUI;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -45,9 +47,9 @@ public class LoginFrame extends JFrame implements ActionListener{
 		JFrame p0 = new JFrame("Login");
 		
 		JLabel logo = new JLabel(new ImageIcon("./src/GUI/Piccolo_Logo.png")); 
-		
-		userTF = new JTextField("CodOp");
+		userTF = new JTextField("");
 		userTF.setPreferredSize( new Dimension( 120, 24 ) );
+	
 		
 		passwordF = new JPasswordField(10);
 		passwordF.setPreferredSize( new Dimension( 120, 24 ) );

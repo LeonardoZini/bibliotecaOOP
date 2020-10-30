@@ -37,7 +37,7 @@ public class TableSearch extends JFrame{
 	
 	
 	
-	public TableSearch(ArrayList<Libro> data) {
+	public TableSearch(ArrayList<Libro> data,String codOp) {
 		super("Risultati");
 		
 		setUndecorated(true);
@@ -174,6 +174,7 @@ public class TableSearch extends JFrame{
 					prenota.setFont(f);
 					
 					JButton orange = new JButton();
+					orange.setEnabled(false);
 					orange.setBackground(new java.awt.Color(253, 185, 19));
 					orange.setFocusPainted(false);
 					orange.setBorderPainted(false);
@@ -181,10 +182,12 @@ public class TableSearch extends JFrame{
 					orange1.setBackground(new java.awt.Color(253, 185, 19));
 					orange1.setFocusPainted(false);
 					orange1.setBorderPainted(false);
+					orange1.setEnabled(false);
 					JButton orange2 = new JButton();
 					orange2.setBackground(new java.awt.Color(253, 185, 19));
 					orange2.setFocusPainted(false);
 					orange2.setBorderPainted(false);
+					orange2.setEnabled(false);
 					
 					JButton no = new JButton("No");
 					no.setBackground(new java.awt.Color(253, 185, 19));
@@ -205,7 +208,7 @@ public class TableSearch extends JFrame{
 					prenota.add(orange2);
 					
 					prenota.add(new JLabel(""));
-					JLabel testo = new JLabel("Vuoi prestare \""+table.getModel().getValueAt(table.getSelectedRow(), 1).toString()+"\"?");
+					JLabel testo = new JLabel("<html>Vuoi prestare <br>\""+table.getModel().getValueAt(table.getSelectedRow(), 1).toString()+"\"?</html>");
 					testo.setFont(ft);
 					testo.setForeground(new java.awt.Color(69, 85, 96));
 					prenota.add(testo);
@@ -234,8 +237,10 @@ public class TableSearch extends JFrame{
 					    	 * Aprire una nuova finestra form dove verrà chiesto il codieUtente, recuperate le        
 					    	 * informazioni, stampate sul form e chiesta conferma.                                    
 					    	 * Se viene confermato, quel libro risulterà in prestito da quel moemnto a quell'utente   
-					    	 */      
-					    	
+					    	 */     
+					    	new SearchUser(table.getModel().getValueAt(table.getSelectedRow(), 0).toString(),codOp);
+					    	jDialog.dispose();
+					    
 					    	System.out.println("Processing..");    
 					    }
 					});
@@ -283,9 +288,9 @@ public class TableSearch extends JFrame{
 		
 	
 	public static void main(String[] args) {
-		ArrayList<Libro> data=null;
+		ArrayList<Libro> data=new ArrayList<Libro>();
 		data.add(new Libro());
-		new TableSearch(data);		
+		new TableSearch(data,"AA1111");		
 		
 	}
 

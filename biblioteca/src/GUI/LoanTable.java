@@ -30,7 +30,7 @@ public class LoanTable extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	String[] columnNames= {"ISBN", "CF","idOperatore","Data inizio prestito","Test"};
+	String[] columnNames= {"ISBN", "CF","idOperatore","Data inizio prestito","Data Consegna"};
 	
 	public LoanTable(String cF) {
 		super("Prestiti di: "+cF);
@@ -57,14 +57,14 @@ public class LoanTable extends JFrame{
 		}
 		
 	
-		setUndecorated(true);
+		
 		
 		Font f = new Font("Default",Font.PLAIN,18);
 		Font f2 = new Font("Default",Font.PLAIN,12);
 		
 		JPanel container = new JPanel(new BorderLayout());
 		
-		JButton confirm = new JButton("Prenota");
+		JButton confirm = new JButton("Chiudi Prestito");
 		confirm.setBackground(new java.awt.Color(253, 185, 19));
 		confirm.setForeground(new java.awt.Color(69, 85, 96));
 		confirm.setFont(f);
@@ -193,7 +193,7 @@ class JTableButtonModel2 extends AbstractTableModel {
 		   case 1 : return rows.get(row).getCf();
 		   case 2 : return rows.get(row).getCodOp();
 		   case 3 : return rows.get(row).getData_prestito();
-		   case 4 : return rows.get(row).getData_consegna();
+		   case 4 : return rows.get(row).getData_consegna()	;
 		   
 		   }
 		   return "Null";
@@ -203,7 +203,7 @@ class JTableButtonModel2 extends AbstractTableModel {
 	      return false;
 	   }
 	   public Class<? extends Object> getColumnClass(int column) {
-	      return getValueAt(0, column).getClass();
+	      return String.class;
 	   }
 }
 

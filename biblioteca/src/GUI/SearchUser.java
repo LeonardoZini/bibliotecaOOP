@@ -143,26 +143,32 @@ public class SearchUser extends JFrame {
 			    				+ "ISBN=%s&cf=%s&codOp=%s",ISBN,codiceUtente,codOp));
 						HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 						connection.setRequestMethod("POST");
-						BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-						System.out.println(read.readLine());
+						//BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+						//System.out.println(read.readLine());
 						
 						/*
 						 * HANDLE DEWLLA RISPOSTA
 						 */
 						switch(connection.getResponseCode()) {
 							case 200: //Tutto OK
+								JOptionPane.showMessageDialog(jDialog, "Prestito confermato");
+								
 								break;
 							case 404:
 								//Utente non trovato
+								JOptionPane.showMessageDialog(jDialog, "Utente non trovato");
 								break;
 							case 401:
 								//Libro non presente nella biblioteca dell'operatore
+								JOptionPane.showMessageDialog(jDialog, "Libro non presente in questa biblioteca");
 								break;
 							case 403:
 								//Libro non è disponibile
+								JOptionPane.showMessageDialog(jDialog, "Libro non è disponibile");
 								break;
 								
 						}
+						jDialog.dispose();
 		    		}
 		    		catch(Exception e1) {
 		    			e1.printStackTrace();
