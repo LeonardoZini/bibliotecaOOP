@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +36,7 @@ public class LoanTable extends JFrame{
 	public LoanTable(String cF) {
 		super("Prestiti di: "+cF);
 		
+
 		/*
 		 * Carico i prestiti ATTIVI di cf
 		 */
@@ -50,11 +52,12 @@ public class LoanTable extends JFrame{
 			
 			Prestito[] prest = om.readValue(read.readLine(),Prestito[].class);
 			data = new ArrayList<Prestito>(Arrays.asList(prest));
-			
+			connection.disconnect();
 			} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println("new table with: "+data.size());
 		
 	
 		
@@ -113,6 +116,27 @@ public class LoanTable extends JFrame{
 				/*
 				 * TODO prestito confirm
 				 */
+				
+				
+				String isbn_to_close = table.getModel().getValueAt(table.getSelectedRow(), 0).toString();
+				URL url;
+				try {
+					url = new URL(String.format("http://2.224.243.66:8080/prestito/chiudi?"
+							+ "ISBN=%s",isbn_to_close));
+					HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+					connection.setRequestMethod("POST");
+					BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+					System.out.println(read.readLine());
+					connection.disconnect();
+				} catch (MalformedURLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				JOptionPane.showMessageDialog(rootPane, "Prestito chiuso");
+				
 				
 			}
 		});

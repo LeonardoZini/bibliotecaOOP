@@ -1,16 +1,10 @@
 package GUI;
 
-import javax.swing.*;
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import Dominio.*;
-import java.net.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-
-//import java.net.HttpUrlConnection;
-import javax.swing.table.DefaultTableModel;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
@@ -18,16 +12,32 @@ import java.awt.event.FocusEvent;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.DateFormat;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import DBManager.DBManager;
-//import View.BorderLayout;
-//import View.JLabel;
-//import View.JPanel;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Timer;
+
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.core.type.TypeReference;
+import Dominio.Libro;
 
 
 public class HomepageFrame extends JFrame implements ActionListener{
@@ -134,11 +144,11 @@ public class HomepageFrame extends JFrame implements ActionListener{
 		    public void actionPerformed(ActionEvent e)
 		    {
 		        System.exit(0);
-		    }
+		    }		
 		});
 		//--------------------------
 		
-		JLabel logo = new JLabel(new ImageIcon("./src/GUI/Logo_BT.png")); 
+		JLabel logo = new JLabel(new ImageIcon(this.getClass().getResource("Logo_BT.png"))); 
 		
 		//--------------------------Pannello della ricerca 
 	
@@ -295,13 +305,16 @@ public class HomepageFrame extends JFrame implements ActionListener{
 					}
 				}
 				HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+				
 				BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 				
 				Libro[] libro = om.readValue(read.readLine(),Libro[].class);
+				connection.disconnect();
 				ArrayList<Libro> data = new ArrayList<Libro>(Arrays.asList(libro));
 				
-				if (!data.isEmpty()){
-					new TableSearch(data,CodOp);
+				if (!data.isEmpty()){						
+							new TableSearch(data,CodOp);						
+					
 				}
 				else {
 					JOptionPane.showMessageDialog(null, "Nessun riscontro");
@@ -311,7 +324,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 				e1.printStackTrace();
 			} catch (IOException e1) {
 				JOptionPane.showMessageDialog(null,   e1.toString());
-			}								
+			} 						
 		}
 		
 		if(e.getSource() == AboutBT) {
@@ -510,6 +523,7 @@ public class HomepageFrame extends JFrame implements ActionListener{
 							JOptionPane.showMessageDialog(rootPane, "Errore nell'inserimento dell'utente!");
 						}
 						
+						connection.disconnect();
 		
 			    	}
 			    	catch(IOException e1) {
@@ -671,17 +685,17 @@ public class HomepageFrame extends JFrame implements ActionListener{
 			    	 */
 			    	try{
 			    		String isbn=ISBNTF.getText();
-			    		String titolo = NomeTF.getText();
-			    		String genere = GenereTF.getText();
-			    		String autore= AutoreTF.getText();
-			    		String pagine = PagineTF.getText();
+			    		String titolo = NomeTF.getText().replace(' ', '-');
+			    		String genere = GenereTF.getText().replace(' ', '-');
+			    		String autore= AutoreTF.getText().replace(' ', '-');
+			    		String pagine = PagineTF.getText().replace(' ', '-');
 			    		
 			    		System.out.println(String.format("http://2.224.243.66:8080/insert/libro?ISBN=%s&titolo=%s&"
-			    				+ "genere=%s&autore=%s&pagine%s",isbn,titolo,genere,autore,pagine));
+			    				+ "genere=%s&autore=%s&pagine=%s&codop=%s",isbn,titolo,genere,autore,pagine,CodOp));
 			    		
 			    		
 			    		url=new URL(String.format("http://2.224.243.66:8080/insert/libro?ISBN=%s&titolo=%s&"
-			    				+ "genere=%s&pagine=%s&autore=%s&",isbn,titolo,genere,pagine,autore));
+			    				+ "genere=%s&autore=%s&pagine=%s&codop=%s",isbn,titolo,genere,autore,pagine,CodOp));
 			    		HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 			    		
 						connection.setRequestMethod("POST");
@@ -693,8 +707,9 @@ public class HomepageFrame extends JFrame implements ActionListener{
 							JOptionPane.showMessageDialog(rootPane, "ISBN gia presente nel database");
 						}
 						else {
-							JOptionPane.showMessageDialog(rootPane, "Errore nell'inserimento del libro!");
+							JOptionPane.showMessageDialog(rootPane, "Errore nell'inserimento del libro!\n" + connection.getResponseCode()+" "+connection.getResponseMessage());
 						}
+						connection.disconnect();
 						
 		
 			    	}

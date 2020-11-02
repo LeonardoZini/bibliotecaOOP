@@ -31,7 +31,7 @@ public class Operatore extends Persona {
 	}
 
 	public void Prestito(Utente t, Libro l) {
-		if(!l.IsAvailable()) {
+		if(l.getDisponibile().equals("N")) {
 			//Libro non disponibile al prestito
 			System.out.println("Libro non disponibile");
 			return;
@@ -39,14 +39,14 @@ public class Operatore extends Persona {
 		
 		//Libro disponibile		
 		t.addLibro_in_prestito(l);
-		l.setIsAvailable(false);
+		l.setDisponibile("N");
 				
 	}
 	
 	public void Consegna(Utente t, Libro l) {
 		if(t.getLibri_in_prestito().contains(l)) {
 			t.removeLibro_in_prestito(l);
-			l.setIsAvailable(true);
+			l.setDisponibile("S");
 		}
 		
 		else {

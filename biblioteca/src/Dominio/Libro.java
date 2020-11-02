@@ -2,7 +2,7 @@ package Dominio;
 
 public class Libro {
 		private String ISBN; // Univoco
-		private Boolean isAvailable;
+		private String disponibile;
 		private String nome;
 		private String genere;
 		private String autore;
@@ -14,16 +14,15 @@ public class Libro {
 			super();
 			this.ISBN="None";
 			this.nome="None";
-			this.isAvailable=true;
+			this.disponibile="S";
 			this.genere="None";
 			this.autore="None";
 			this.pagine="";
 		}
 
-		public Libro(String iSBN, String nome, Boolean isAvailable, String genere, String autore, String pagine) {
-			super();
-			ISBN = iSBN;
-			this.isAvailable = isAvailable;
+		public Libro(String iSBN, String nome, String disponibile, String genere, String autore, String pagine) {
+			this.ISBN = iSBN;
+			this.disponibile = disponibile;
 			this.nome = nome;
 			this.genere = genere;
 			this.autore = autore;
@@ -36,11 +35,11 @@ public class Libro {
 		public void setISBN(String iSBN) {
 			ISBN = iSBN;
 		}
-		public boolean IsAvailable() {
-			return isAvailable;
+		public String getDisponibile() {
+			return disponibile;
 		}
-		public void setIsAvailable(boolean isAvailable) {
-			this.isAvailable = isAvailable;
+		public void setDisponibile(String disponibile) {
+			this.disponibile = disponibile;
 		}
 		public String getNome() {
 			return nome;
@@ -69,7 +68,7 @@ public class Libro {
 
 		@Override
 		public String toString() {
-			return "Libro [ISBN=" + ISBN + ", isAvailable=" + isAvailable + ", nome=" + nome + ", genere=" + genere
+			return "Libro [ISBN=" + ISBN + ", disponibile=" + disponibile + ", nome=" + nome + ", genere=" + genere
 					+ ", autore=" + autore + ", pagine=" + pagine + "]";
 		}
 		

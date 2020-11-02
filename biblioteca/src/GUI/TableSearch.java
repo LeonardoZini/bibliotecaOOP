@@ -2,8 +2,6 @@ package GUI;
 import java.awt.event.ActionEvent;
 import Dominio.*;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -39,6 +37,7 @@ public class TableSearch extends JFrame{
 	
 	public TableSearch(ArrayList<Libro> data,String codOp) {
 		super("Risultati");
+		System.out.println("new table with: "+data.size());
 		
 		setUndecorated(true);
 		
@@ -278,6 +277,7 @@ public class TableSearch extends JFrame{
 		p2.add(container, BorderLayout.CENTER);
 		p2.add(p1,BorderLayout.PAGE_END);
 		
+		
 		setContentPane(p2);
 		setVisible(true);
 		setExtendedState(JFrame.MAXIMIZED_BOTH); 
@@ -341,6 +341,7 @@ class JTableButtonModel extends AbstractTableModel {
 		   case 2 : return rows.get(row).getGenere();
 		   case 3 : return rows.get(row).getPagine();
 		   case 4 : return rows.get(row).getAutore(); 
+		   case 5 : return rows.get(row).getDisponibile();
 		   
 		   }
 		   return "Null";

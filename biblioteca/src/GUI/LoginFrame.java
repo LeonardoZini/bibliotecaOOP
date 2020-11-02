@@ -19,7 +19,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import DBManager.DBManager;
 //import View.BorderLayout;
 //import View.JLabel;
 //import View.JPanel;
@@ -46,7 +45,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 		Font f = new Font("Default",Font.PLAIN,18);
 		JFrame p0 = new JFrame("Login");
 		
-		JLabel logo = new JLabel(new ImageIcon("./src/GUI/Piccolo_Logo.png")); 
+		JLabel logo = new JLabel(new ImageIcon(this.getClass().getResource("Piccolo_Logo.png"))); 
 		userTF = new JTextField("");
 		userTF.setPreferredSize( new Dimension( 120, 24 ) );
 	
@@ -82,7 +81,7 @@ public class LoginFrame extends JFrame implements ActionListener{
 					connection.setRequestMethod("POST");
 					BufferedReader read = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 					System.out.println(read.readLine());
-					
+					connection.disconnect();
 					rootPane.setVisible(false);
 					rootPane.setEnabled(false);
 					p0.dispose();
